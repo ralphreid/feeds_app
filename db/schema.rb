@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(:version => 20131117161112) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "tags", ["article_id"], :name => "index_tags_on_article_id"
+  add_index "tags", ["user_id"], :name => "index_tags_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false

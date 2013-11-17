@@ -1,5 +1,5 @@
 class CreateTags < ActiveRecord::Migration
-  def up
+  def change
     create_table :tags do |t|
       t.belongs_to :article
       t.belongs_to :user
@@ -7,9 +7,7 @@ class CreateTags < ActiveRecord::Migration
       t.boolean :bookmark
       t.timestamps
     end
-  end
-
-  def down
-    drop_table :tags
+    add_index :tags, :article_id
+    add_index :tags, :user_id
   end
 end
