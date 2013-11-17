@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :role, presence: true
 
+  has_many :tags
+  has_many :articles, :through => :tags
+  has_many :feeds, :through => :subscriptions
+
 end
