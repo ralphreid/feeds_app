@@ -4,10 +4,12 @@ class CreateFeeds < ActiveRecord::Migration
       t.string :title
       t.text :image_link
       t.text :link
-      t.txt :rss
+      t.text :rss
       t.string :provider
       t.string :category
       t.text :description
+      t.string :image_title
+      t.timestamps
     end
   end
 
