@@ -25,5 +25,9 @@ class Feed < ActiveRecord::Base
       )
   end
 
+  def self.check_for_update_feed(feed)
+    feed = Feedzirra::Feed.fetch_and_parse(feed.rss)
+    updated_feed = Feedzirra::Feed.update(feed)
+  end
 
 end
