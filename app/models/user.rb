@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   # non-Devise fields; need custom validation
-  validates :first_name, presence: true, length: { minimum: 2 }
-  validates :last_name, presence: true
-  validates :role, presence: true
+  # validates :first_name, presence: true, length: { minimum: 2 }
+  # validates :last_name, presence: true
+  # validates :role, presence: true
 
   has_many :tags
   has_many :articles, :through => :tags
