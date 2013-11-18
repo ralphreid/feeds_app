@@ -15,8 +15,6 @@ class Feed < ActiveRecord::Base
     add_feed(feed)
   end
 
-  private
-
   def self.add_feed(feed)
     Feed.create!(
       :title        => feed.title,
@@ -26,5 +24,6 @@ class Feed < ActiveRecord::Base
       :last_modified => feed.last_modified
       )
   end
+
 
 end
