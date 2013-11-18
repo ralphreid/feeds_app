@@ -8,8 +8,8 @@
   %body
 
     .container
-      .nav-bar
-        .left-nav
+      %nav.nav-bar
+        %nav.left-nav
           %h2= link_to "Feedx", root_path
           - if user_signed_in?
             = link_to 'My Feeds',
@@ -19,7 +19,7 @@
           - else
             = link_to 'Find a Feed',
               new_feed_path
-        .right-nav
+        %nav.right-nav
           - if user_signed_in?
             Logged in as
             %b= current_user.email
