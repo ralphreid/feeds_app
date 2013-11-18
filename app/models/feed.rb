@@ -7,8 +7,8 @@ class Feed < ActiveRecord::Base
   # not sure what/if any validation is required if we're pulling all these fields' data from RSS
 
   has_many :articles
+  has_many :subscriptions
   has_many :users, :through => :subscriptions
-  # has_many :subscriptions?
 
   def self.get_feed(rss)
     feed = Feedzirra::Feed.fetch_and_parse(rss)
