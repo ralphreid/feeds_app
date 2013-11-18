@@ -60,5 +60,11 @@ module FeedxApp
     config.assets.version = '1.0'
 
     config.assets.initialize_on_precompile = false
+    # Already set to false prior to Devise install. Reminder below:
+    #  Required for Devise's config: If you are deploying on Heroku with Rails 3.2 only, you may want to set:
+    #   config.assets.initialize_on_precompile = false
+    # On config/application.rb forcing your application to not access the DB
+    # or load models when precompiling your assets.
+
   end
 end

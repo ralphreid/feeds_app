@@ -34,4 +34,22 @@ FeedxApp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Mail setup needed for Devise
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' } # replace localhost:3000 with real email in production
+
+  # Mail setup in general
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+
+  # Mail setup for Mandrill
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mandrillapp.com",
+    port: 25,
+    enable_starttls_auto: true,
+    user_name: ENV["MANDRILL_USERNAME"],
+    password: ENV["MANDRILL_API_KEY"]
+  }
 end
