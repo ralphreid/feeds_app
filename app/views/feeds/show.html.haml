@@ -1,0 +1,46 @@
+%h2= @feed.title # need to add subscribe/unsubscribe button too
+
+#feed-subscribe-button
+  / = button_to "Subscribe", '/subscriptions#update', remote: true, method: :put
+  - if user_signed_in?
+    - if @feed.users.where("user_id = #{current_user.id}").present?
+      = button_to "Unsubscribe", {:controller => :feeds, :action => :unsubscribe}, {:method => :put }
+    - else
+      = button_to "Subscribe", {:controller => :feeds, :action => :subscribe}, {:method => :post }
+
+.feed-about
+  %h4 About
+  %ul
+    %li= pluralize(@feed.users.count, "subscriber")
+    %li Category we'll have to add
+    %li Description if we can find one; otherwise we remove this item
+    %li= link_to "Visit Website", @feed.link
+
+.feed-articles-section
+  %ol
+    - @articles.each do |article|
+      %li
+        .article
+          .article-image
+            %img.img-thumbnail{:src => "http://www.sylvain-lader.fr/wp-content/uploads/2012/07/placeholder.jpg", :width => '40px'}
+          .article-title
+            = article.title
+          .article-date
+            = time_ago_in_words(article.posted_at)
+            ago
+            = "(#{article.posted_at})"
+          .article-summary
+            - if article.description.present?
+              = article.description.truncate(100, :separator => " ")
+              = link_to "Read more...", feed_article_path(@feed, article)
+            - else
+              = link_to "Read on #{@feed.title}", article.link
+
+/ update article image
+/ add link to bookmark (need controller)
+/ add link to archive (need controller)
+/ add link to share on google plus
+/ add pagination
+
+
+
