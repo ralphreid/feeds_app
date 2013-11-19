@@ -9,6 +9,10 @@
 Feed.delete_all
 Article.delete_all
 
+# test account
+User.create!(email: "teamexpats.wdisep2013@gmail.com", password: "teamexpats", role: "user")
+
+
 # Commented out: Need REAL RSS link
 
 # technology

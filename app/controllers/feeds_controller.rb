@@ -1,8 +1,8 @@
-class FeedsController < ActionController::Base
+class FeedsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    
+
   end
 
   def show
@@ -11,6 +11,6 @@ class FeedsController < ActionController::Base
 
     @articles = @feed.articles
   end
-  
+
 end
 
