@@ -1,12 +1,20 @@
 %h2= @feed.title # need to add subscribe/unsubscribe button too
 
+#feed-subscribe-button
+  / = button_to "Subscribe", '/subscriptions#update', remote: true, method: :put
+  - if user_signed_in?
+    - if @feed.users.where("user_id = #{current_user.id}").present?
+      = button_to "Unsubscribe", {:controller => :feeds, :action => :unsubscribe}, {:method => :put }
+    - else
+      = button_to "Subscribe", {:controller => :feeds, :action => :subscribe}, {:method => :post }
+
 .feed-about
-%h4 About
-%ul
-  %li= pluralize(@feed.users.count, "subscriber")
-  %li Category we'll have to add
-  %li Description if we can find one; otherwise we remove this item
-  %li= link_to "Visit Website", @feed.link
+  %h4 About
+  %ul
+    %li= pluralize(@feed.users.count, "subscriber")
+    %li Category we'll have to add
+    %li Description if we can find one; otherwise we remove this item
+    %li= link_to "Visit Website", @feed.link
 
 .feed-articles-section
   %ol

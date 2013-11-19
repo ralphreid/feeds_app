@@ -3,6 +3,8 @@ FeedxApp::Application.routes.draw do
 
   resources :feeds do
     resources :articles
+    post 'subscribe', :on => :member
+    put 'unsubscribe', :on => :member
   end
 
   # The priority is based upon order of creation:
