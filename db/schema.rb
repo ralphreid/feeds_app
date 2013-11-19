@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118140405) do
+ActiveRecord::Schema.define(:version => 20131119160551) do
 
   create_table "articles", :force => true do |t|
     t.integer  "feed_id"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(:version => 20131118140405) do
     t.string   "guid"
   end
 
+  create_table "labels", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "user_id"
+    t.boolean  "archive"
+    t.boolean  "bookmark"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "labels", ["article_id"], :name => "index_tags_on_article_id"
+  add_index "labels", ["user_id"], :name => "index_tags_on_user_id"
+
   create_table "subscriptions", :force => true do |t|
     t.integer  "feed_id"
     t.integer  "user_id"
@@ -51,18 +63,6 @@ ActiveRecord::Schema.define(:version => 20131118140405) do
 
   add_index "subscriptions", ["feed_id"], :name => "index_subscriptions_on_feed_id"
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
-
-  create_table "tags", :force => true do |t|
-    t.integer  "article_id"
-    t.integer  "user_id"
-    t.boolean  "archive"
-    t.boolean  "bookmark"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "tags", ["article_id"], :name => "index_tags_on_article_id"
-  add_index "tags", ["user_id"], :name => "index_tags_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

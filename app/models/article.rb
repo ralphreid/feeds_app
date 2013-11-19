@@ -7,8 +7,8 @@ class Article < ActiveRecord::Base
   # not sure what/if any validation is required if we're pulling all these fields' data from RSS
 
   belongs_to :feed
-  has_many :tags
-  has_many :users, :through => :tags
+  has_many :labels
+  has_many :users, :through => :labels
 
   def self.get_articles_from_feed(feed)
     from_feed = Feedzirra::Feed.fetch_and_parse(feed.rss)
