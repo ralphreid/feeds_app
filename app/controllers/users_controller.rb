@@ -5,4 +5,8 @@ class UsersController < Devise::RegistrationsController
     super
   end
 
+  def show
+    
+  end
+
 end
