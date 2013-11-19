@@ -9,6 +9,7 @@
 Feed.delete_all
 Article.delete_all
 
+# Commented out: Need REAL RSS link
 
 # technology
 Feed.get_feed("http://feeds2.feedburner.com/techradar/computing-news")
@@ -23,19 +24,15 @@ Feed.get_feed("http://feeds.venturebeat.com/VentureBeat")
 Feed.get_feed("http://feeds.feedburner.com/AVcVentureCapitalAndTechnology")
 Feed.get_feed("http://feeds.feedburner.com/AtlanticBusinessChannel")
 
-
 # news
 Feed.get_feed("http://feeds.bbci.co.uk/news/technology/rss.xml")
-Feed.get_feed("http://ireport.cnn.com/feeds/")
-Feed.get_feed("http://www.telegraph.co.uk/rssfeeds/")
-
-
+# Feed.get_feed("http://ireport.cnn.com/feeds/")
+# Feed.get_feed("http://www.telegraph.co.uk/rssfeeds/")
 
 # photography
-Feed.get_feed("http://www.amateurphotographer.co.uk/rss-feeds")
+# Feed.get_feed("http://www.amateurphotographer.co.uk/rss-feeds")
 Feed.get_feed("http://feeds.feedburner.com/OneBigPhoto")
 Feed.get_feed("http://feeds.feedburner.com/shoottokyo")
-
 
 # design
 Feed.get_feed("http://feeds.feedburner.com/yankodesign")
@@ -53,19 +50,10 @@ Feed.get_feed("http://feeds.feedburner.com/ACoupleCooks")
 
 # fashion
 Feed.get_feed("http://feeds.feedburner.com/fashionistacom")
-Feed.get_feed("http://www.coolhunting.com/index")
+# Feed.get_feed("http://www.coolhunting.com/index")
 Feed.get_feed("http://feeds.feedburner.com/BubbyAndBean")
 
-
-
-
 # travel
-Feed.get_feed("http://www.lonelyplanet.com/blog/feed/atom/")
-Feed.get_feed("http://www.budgettravel.com/latest/hotels/feed/")
-Feed.get_feed("http://www.travelzoo.com/uk/feeds/")
-
-
-
-
-
-
+# Feed.get_feed("http://www.lonelyplanet.com/blog/feed/atom/")
+# Feed.get_feed("http://www.budgettravel.com/latest/hotels/feed/")
+# Feed.get_feed("http://www.travelzoo.com/uk/feeds/")

@@ -18,7 +18,7 @@ class Feed < ActiveRecord::Base
   def self.add_feed(feed)
     Feed.create!(
       :title        => feed.title,
-      :rss      => feed.feed_url,
+      :rss          => feed.feed_url,
       :link         => feed.url,
       :guid         => feed.etag,
       :last_modified => feed.last_modified
