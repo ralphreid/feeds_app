@@ -1,5 +1,8 @@
-class UsersController < ApplicationController
-  load_and_authorize_resource
+class UsersController < Devise::RegistrationsController
+  # load_and_authorize_resource
 
+  def create
+    super
+  end
 
 end
