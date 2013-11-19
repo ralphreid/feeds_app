@@ -7,7 +7,9 @@ class FeedsController < ActionController::Base
 
   def show
     # Article.get_articles_from_feed(@feed)
-    @articles = Article.where(:feed_id)
+    @feed = Feed.find params[:id]
+
+    @articles = @feed.articles
   end
   
 end
