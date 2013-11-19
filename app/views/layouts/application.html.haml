@@ -6,8 +6,43 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
+
+    .container
+      %nav.nav-bar
+        %nav.left-nav
+          %h2= link_to "Feedx", root_path
+          - if user_signed_in?
+            = link_to 'My Feeds',
+              feeds_path
+            = link_to 'Find a Feed',
+              new_feeds_path
+          - else
+            = link_to 'Find a Feed',
+              new_feed_path
+        %nav.right-nav
+          - if user_signed_in?
+            Logged in as
+            %b= current_user.email
+            = link_to "My Profile"
+              / insert my profile path here
+             \|
+            = link_to "Account Settings", edit_user_registration_path
+            \|
+            = link_to "Sign out", destroy_user_session_path, method: :delete
+          - else
+            = link_to "Sign up", new_user_registration_path
+            \|
+            = link_to "Sign in",
+              new_user_session_path
+
+          - flash.each do |name, msg|
+            = content_tag :div, msg, :id => "flash_ #{name}"
+
     // required Devise flashes
-    .devise-messages
-      %p.notice= notice
-      %p.alert= alert
+    / .devise-messages
+    /   %p.notice= notice
+    /   %p.alert= alert
+
     = yield
+
+

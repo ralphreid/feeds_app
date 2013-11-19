@@ -1,0 +1,15 @@
+%h2 Show Feed
+%h3= @feed.title
+%ol
+  - @articles.each do |article|
+    %li
+      .article
+        .article-image
+          %img.img-thumbnail{:src => "http://www.sylvain-lader.fr/wp-content/uploads/2012/07/placeholder.jpg", :width => '40px'}
+        .article-title
+          = article.title
+        .article_summary
+          = article.description
+   
+
+
