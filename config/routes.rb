@@ -1,5 +1,10 @@
 FeedxApp::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => 'users'}
+  # , :path_prefix => 'my'
+  devise_scope :user do
+    # get "/users/show/:id" => "users#show"
+    resources :users, :only => [:show] 
+  end
 
   resources :feeds do
     resources :articles
