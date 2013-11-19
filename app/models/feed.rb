@@ -16,13 +16,13 @@ class Feed < ActiveRecord::Base
   end
 
   def self.add_feed(feed)
-    Feed.create!(
-      :title        => feed.title,
-      :rss          => feed.feed_url,
-      :link         => feed.url,
-      :guid         => feed.etag,
-      :last_modified => feed.last_modified
-      )
+    f = Feed.where(:rss => feed.rss).first_or_create
+    f.title = feed.title
+    f.rss = feed.feed_url
+    f.link = feed.url
+    f.guid = feed.etag
+    f.last_modified = feed.last_modified
+    f.save!
   end
 
   def self.check_for_update_feed(feed)
