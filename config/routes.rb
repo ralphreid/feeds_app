@@ -1,7 +1,9 @@
 FeedxApp::Application.routes.draw do
-  devise_for :users, :feeds
+  devise_for :users
 
-  resources :feeds
+  resources :feeds do
+    resources :articles
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -53,7 +55,7 @@ FeedxApp::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # Required Devise config: "Ensure you have defined root_url to *something* in your config/routes.rb"
-  root :to => 'welcome#index'
+  root :to => 'feeds#index' # change later
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,5 +1,5 @@
-class SubscriptionsController < ActionController::Base
+class SubscriptionsController < ApplicationController
   load_and_authorize_resource
 
-  
+
 end
