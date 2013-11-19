@@ -16,7 +16,7 @@ class Feed < ActiveRecord::Base
   end
 
   def self.add_feed(feed)
-    f = Feed.where(:rss => feed.rss).first_or_create
+    f = Feed.where(:rss => feed.feed_url).first_or_create
     f.title = feed.title
     f.rss = feed.feed_url
     f.link = feed.url
