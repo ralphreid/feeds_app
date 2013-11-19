@@ -10,54 +10,58 @@ Feed.delete_all
 Article.delete_all
 
 # test account
-User.create!(email: "teamexpats.wdisep2013@gmail.com", password: "teamexpats", role: "user")
+# User.create!(email: "teamexpats.wdisep2013@gmail.com", password: "teamexpats", role: "user")
 
 
 # Commented out: Need REAL RSS link
-
 # technology
-Feed.get_feed("http://feeds2.feedburner.com/techradar/computing-news")
-Feed.get_feed("http://feeds.mashable.com/Mashable")
-Feed.get_feed("http://feeds.gawker.com/lifehacker/full")
-Feed.get_feed("http://feeds.feedburner.com/TechViral")
-Feed.get_feed("http://feeds.feedburner.com/uk/gizmodo")
+Feed.get_feed("http://feeds2.feedburner.com/techradar/computing-news", "technology")
+Feed.get_feed("http://feeds.mashable.com/Mashable", "technology")
+Feed.get_feed("http://feeds.gawker.com/lifehacker/full", "technology")
+Feed.get_feed("http://feeds.feedburner.com/TechViral", "technology")
+Feed.get_feed("http://feeds.feedburner.com/uk/gizmodo", "technology")
+
 
 # business
-Feed.get_feed("http://mf.feeds.reuters.com/reuters/UKTopNews")
-Feed.get_feed("http://feeds.venturebeat.com/VentureBeat")
-Feed.get_feed("http://feeds.feedburner.com/AVcVentureCapitalAndTechnology")
-Feed.get_feed("http://feeds.feedburner.com/AtlanticBusinessChannel")
+Feed.get_feed("http://mf.feeds.reuters.com/reuters/UKTopNews", "business")
+Feed.get_feed("http://feeds.venturebeat.com/VentureBeat", "business")
+Feed.get_feed("http://feeds.feedburner.com/AVcVentureCapitalAndTechnology", "business")
+Feed.get_feed("http://feeds.feedburner.com/AtlanticBusinessChannel", "business")
+
+feed = Feedzirra::Feed.fetch_and_parse("http://feeds.feedburner.com/PaulDixExplainsNothing")
 
 # news
-Feed.get_feed("http://feeds.bbci.co.uk/news/technology/rss.xml")
-# Feed.get_feed("http://ireport.cnn.com/feeds/")
-# Feed.get_feed("http://www.telegraph.co.uk/rssfeeds/")
+Feed.get_feed("http://feeds.bbci.co.uk/news/technology/rss.xml", "news")
+Feed.get_feed("http://blogs.cbn.com/HurdontheWeb/Rss.aspx", "news")
+
 
 # photography
-# Feed.get_feed("http://www.amateurphotographer.co.uk/rss-feeds")
-Feed.get_feed("http://feeds.feedburner.com/OneBigPhoto")
-Feed.get_feed("http://feeds.feedburner.com/shoottokyo")
+Feed.get_feed("http://feeds.feedburner.com/OneBigPhoto", "photography")
+Feed.get_feed("http://feeds.feedburner.com/shoottokyo", "photography")
+
 
 # design
-Feed.get_feed("http://feeds.feedburner.com/yankodesign")
-Feed.get_feed("http://feeds.feedburner.com/fubiz")
-Feed.get_feed("http://feeds2.feedburner.com/Swissmiss")
-Feed.get_feed("http://feeds.feedburner.com/fastcodesign/feed")
-Feed.get_feed("http://feeds.feedburner.com/dezeen")
+Feed.get_feed("http://feeds.feedburner.com/yankodesign", "design")
+Feed.get_feed("http://feeds.feedburner.com/fubiz", "design")
+Feed.get_feed("http://feeds2.feedburner.com/Swissmiss", "design")
+Feed.get_feed("http://feeds.feedburner.com/fastcodesign/feed", "design")
+Feed.get_feed("http://feeds.feedburner.com/dezeen", "design")
+
 
 # cooking
-Feed.get_feed("http://feeds.feedburner.com/smittenkitchen")
-Feed.get_feed("http://feeds.feedburner.com/ourbestbites/djLu")
-Feed.get_feed("http://feeds.feedburner.com/LoveAndOliveOil")
-Feed.get_feed("http://feeds.feedburner.com/saveurkitchen")
-Feed.get_feed("http://feeds.feedburner.com/ACoupleCooks")
+Feed.get_feed("http://feeds.feedburner.com/smittenkitchen", "cooking")
+Feed.get_feed("http://feeds.feedburner.com/ourbestbites/djLu", "cooking")
+Feed.get_feed("http://feeds.feedburner.com/LoveAndOliveOil", "cooking")
+Feed.get_feed("http://feeds.feedburner.com/saveurkitchen", "cooking")
+Feed.get_feed("http://feeds.feedburner.com/ACoupleCooks", "cooking")
+
+
 
 # fashion
-Feed.get_feed("http://feeds.feedburner.com/fashionistacom")
-# Feed.get_feed("http://www.coolhunting.com/index")
-Feed.get_feed("http://feeds.feedburner.com/BubbyAndBean")
+Feed.get_feed("http://feeds.feedburner.com/fashionistacom", "fashion")
+Feed.get_feed("http://feeds.feedburner.com/BubbyAndBean", "fashion")
 
 # travel
-# Feed.get_feed("http://www.lonelyplanet.com/blog/feed/atom/")
-# Feed.get_feed("http://www.budgettravel.com/latest/hotels/feed/")
-# Feed.get_feed("http://www.travelzoo.com/uk/feeds/")
+Feed.get_feed("http://www.lonelyplanet.com/blog/feed/atom/", "travel")
+
+
