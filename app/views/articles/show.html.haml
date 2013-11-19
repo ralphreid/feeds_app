@@ -1,34 +1,43 @@
-%h1 @article.title
-%br/
-%br/
-%h2 @article.posted_at
-%br/
-%h3 Source: #{@article.feed.title}
-%h3 By, #{@article.author}
-%br/
-%h4 @article.link
-%br/
-%br/
+%h2= @article.title
+
+.article-feed-info
+  %h4= @article.feed.title
+  %ul
+    %li= pluralize(@article.feed.users.count, "subscriber")
+    %li Probably no category but we'll figure it out
+    %li= link_to "Go to Feed", @article.feed.link
+
 %hr
-/ insert a nav_bar here i.e archieve | bookmark | share on google | @article.comment_link(<-this one should work fine)
+.article-basics
+  %h5= "Posted: #{@article.posted_at}"
+  %h5= "By: #{@article.author}"
+
 %hr
-%br/
-%br/
-.article_summary
+.article-nav
+  / insert a nav_bar here i.e archieve | bookmark | share on google | @article.comment_link(<-this one should work fine)
+  %ul
+    %li Archive
+    %li Bookmark
+    %li Share on Google Plus
+    %li= link_to "Read on #{@article.feed.title}", @article.link
+
+%hr
+.article-summary
 / this works in the console, can always run with just @article.description if it doesn't in the browser
 - if @article.content.present?
-  @article.content
+  = @article.content
 - else
-  @article.description
-%br/
+  = @article.description
+
 %hr
 / insert a nav_bar here i.e archieve | bookmark | share on google | @article.comment_link(<-this one should work fine)
-%br/
-%br/
+
 %hr
 %nav.nav_bottom
-  =link_to 'Back', articles_path
-
+  = link_to "Back", feed_path(@article.feed)
+  Next Post
+  Previous Post
+/figure out logic for next and previous
 
 
 

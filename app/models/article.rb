@@ -18,15 +18,15 @@ class Article < ActiveRecord::Base
 
   def self.add_articles(articles, feed_id)
     articles.each do |article|
-      Article.create!(
-          :title         => article.title,
-          :description      => article.summary,
-          :content   => article.content,
-          :link          => article.url,
-          :posted_at => article.published,
-          :author    => article.author,
-          :feed_id   => feed_id
-        )
+      a = Article.where(:link => article.url).first_or_create
+      a.title = article.title
+      a.description = article.summary
+      a.content = article.content
+      a.link = article.url
+      a.posted_at = article.published
+      a.author = article.author
+      a.feed_id = feed_id
+      a.save!
     end
   end
 
