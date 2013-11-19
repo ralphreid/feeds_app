@@ -33,6 +33,9 @@ GEM
     arel (3.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.0.1)
+    better_errors (1.0.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.0.4)
@@ -211,6 +214,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bcrypt-ruby (~> 3.0.0)
+  better_errors
   binding_of_caller
   cancan
   capybara
