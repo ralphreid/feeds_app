@@ -6,7 +6,8 @@ class FeedsController < ActionController::Base
   end
 
   def show
-
+    # Article.get_articles_from_feed(@feed)
+    @articles = Article.where(:feed_id)
   end
   
 end
