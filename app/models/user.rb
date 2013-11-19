@@ -15,9 +15,9 @@ class User < ActiveRecord::Base
   # validates :last_name, presence: true
   # validates :role, presence: true
 
-  has_many :tags, :dependent => :destroy
+  has_many :labels, :dependent => :destroy
   has_many :subscriptions, :dependent => :destroy # should have subscriptions too if we're adding a through relationship
-  has_many :articles, :through => :tags
+  has_many :articles, :through => :labels
   has_many :feeds, :through => :subscriptions
 
 end
