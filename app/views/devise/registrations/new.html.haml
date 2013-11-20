@@ -21,5 +21,10 @@
     = f.label :password_confirmation
     %br/
     = f.password_field :password_confirmation
+  %div
+    = f.file_field :image
+    %br/
+    / = f.file_
+
   %div= f.submit "Sign up"
 = render "devise/shared/links"
