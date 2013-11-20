@@ -29,13 +29,13 @@ $(function() {
       type: 'POST',
       success: function() {
         var $subscribe = $('#subscribe');
+        var $visibility = $('#subscribe-visibility');
         $subscribe.html('Unsubscribe');
         $subscribe.removeClass('subscribe');
         $subscribe.addClass('unsubscribe');
         $('#subscribe.unsubscribe').one('click', unsubscribeFromFeed);
-        $('#subscribe-visibility').removeClass('hidden'); // provide option for user to hide this feed on profile right after subscribing for the first time
-        $('#subscribe-visibility').show(); // for when a user subscribes then unsubscribes (which .hide() this button) then subscribes again...
-        $('#subscribe-visibility').addClass('hide-on-profile');
+        $visibility.removeClass('hidden'); // provide option for user to hide this feed on profile right after subscribing for the first time
+        $visibility.addClass('hide-on-profile');
         $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
 
         var $subscribeCount = $('#subscribe-count').val();
@@ -62,7 +62,7 @@ $(function() {
         $subscribe.removeClass('unsubscribe');
         $subscribe.addClass('subscribe');
         $('#subscribe.subscribe').one('click', subscribeToFeed);
-        $('#subscribe-visibility').hide(); // no need for either 'hide on profile' or 'show on profile' if unsubscribed
+        $('#subscribe-visibility').addClass('hidden'); // no need for either 'hide on profile' or 'show on profile' if unsubscribed
 
         var $subscribeCount = $('#subscribe-count').val();
         updateSubscribeCountOnFeedShowPage($subscribeCount, "unsubscribe");
