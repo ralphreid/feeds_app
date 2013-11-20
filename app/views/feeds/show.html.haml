@@ -2,13 +2,12 @@
 
 .feed-subscribe
   / = button_to "Subscribe", '/subscriptions#update', remote: true, method: :put
-  - if user_signed_in?
-    - if @feed.users.where("user_id = #{current_user.id}").present?
-      = button_to "Unsubscribe", {:controller => :feeds, :action => :unsubscribe}, {:method => :put }
-    - else
-      = button_to "Subscribe", {:controller => :feeds, :action => :subscribe}, {:method => :post }
-  Javascript version below:
-  %br/
+  / - if user_signed_in?
+  /   - if @feed.users.where("user_id = #{current_user.id}").present?
+  /     = button_to "Unsubscribe", {:controller => :feeds, :action => :unsubscribe}, {:method => :put }
+  /   - else
+  /     = button_to "Subscribe", {:controller => :feeds, :action => :subscribe}, {:method => :post }
+  / Javascript version below:
   - if user_signed_in?
     - if @feed.users.where("user_id = #{current_user.id}").present?
       %button#subscribe.unsubscribe{"data-feed-id" => "#{@feed.id}"} Unsubscribe
@@ -18,7 +17,7 @@
 .feed-about
   %h4 About
   %ul
-    %li= pluralize(@feed.users.count, "subscriber")
+    %li#subscribe-count= pluralize(@feed.users.count, "subscriber")
     %li Category we'll have to add
     %li Description if we can find one; otherwise we remove this item
     %li= link_to "Visit Website", @feed.link

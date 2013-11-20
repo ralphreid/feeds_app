@@ -19,6 +19,14 @@ $(function() {
         $subscribe.removeClass('subscribe');
         $subscribe.addClass('unsubscribe');
         $('#subscribe.unsubscribe').one('click', unsubscribeFromFeed);
+
+        var $subscribeCount = $('#subscribe-count').val();
+        $subscribeCount++;
+        if($subscribeCount == 1) {
+          $('#subscribe-count').html($subscribeCount + " subscriber")
+        } else {
+          $('#subscribe-count').html($subscribeCount + " subscribers")
+        }
       },
       error: function() {
         console.log('ERROR');
@@ -41,6 +49,14 @@ $(function() {
         $subscribe.removeClass('unsubscribe');
         $subscribe.addClass('subscribe');
         $('#subscribe.subscribe').one('click', subscribeToFeed);
+
+        var $subscribeCount = $('#subscribe-count').val();
+        $subscribeCount - 1;
+        if($subscribeCount == 1) {
+          $('#subscribe-count').html($subscribeCount + " subscriber")
+        } else {
+          $('#subscribe-count').html($subscribeCount + " subscribers")
+        }
       },
       error: function() {
         console.log('ERROR');
