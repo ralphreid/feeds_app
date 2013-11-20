@@ -9,19 +9,17 @@
 
     .container
       %nav.nav-bar
-        %nav.left-nav
+        %nav.top-left-nav
           %h2= link_to "Feedx", root_path
           - if user_signed_in?
             = link_to 'My Feeds', feeds_path
             \|
           = link_to 'Find a Feed', new_feed_path # update link later! should be a 'search or browse by categories' type page
-        %nav.right-nav
+        %nav.top-right-nav
           - if user_signed_in?
             Logged in as
             %b= current_user.email
             = link_to "My Profile", user_path(current_user) # update link later!
-            \|
-            = link_to "Account Settings", edit_user_registration_path
             \|
             = link_to "Sign out", destroy_user_session_path, method: :delete
           - else
@@ -33,6 +31,9 @@
 
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_ #{name}"
+        %nav.top-left-nav
+          %ul
+            %li= link_to "Change My Account Settings", edit_user_registration_path
 
     = yield
 

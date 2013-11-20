@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
 
   before_validation :assign_default_role
 
+  mount_uploader :image, ImageUploader
+
   def self.from_omniauth(auth)
     if user = User.find_by_email(auth.info.email)  # auth[:info][:email] because hashymash is used
       user.provider = auth.provider
