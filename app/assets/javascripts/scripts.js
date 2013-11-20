@@ -140,7 +140,7 @@ $(function() {
     var $this = $(this);
     var articleId = $this.data('article-id');
     var feedId = $this.data('feed-id');
-    var url = '/feeds/' + feedId + '/articles/' + articleId + '/bookmark';
+    var url = '/feeds/' + feedId + '/articles/' + articleId + '/archive';
 
     $.ajax({
       url: url,
@@ -193,7 +193,7 @@ $(function() {
       type: 'POST',
       success: function() {
         var $bookmark = $('#bookmark');
-        $bookmark.html('Remove Bookmark');
+        $bookmark.html('Unbookmark');
         $bookmark.removeClass('bookmark');
         $bookmark.addClass('unbookmark');
         $('#bookmark.unbookmark').one('click', unbookmarkArticle);
