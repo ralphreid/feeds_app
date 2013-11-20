@@ -10,6 +10,8 @@ FeedxApp::Application.routes.draw do
     resources :users, :only => [:show]
   end
 
+  match '/feeds/find' => 'feeds#find', as: :find_feed
+
   resources :feeds do
     resources :articles do
       post 'bookmark', :on => :member
@@ -23,6 +25,12 @@ FeedxApp::Application.routes.draw do
     put 'hide_on_profile', :on => :member
     put 'show_on_profile', :on => :member
   end
+
+  get '/feed-not-found' => 'errors#feed_not_found', as: :feed_not_found
+
+  match '/404', :to => 'errors#not_found'
+  match '/422', :to => 'errors#server_error'
+  match '/500', :to => 'errors#server_error'
 
   get '/public_home', to: 'feeds#public_home', as: :public_home
 
