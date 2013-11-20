@@ -4,7 +4,7 @@ FeedxApp::Application.routes.draw do
                 :registrations => 'users',
                 :omniauth_callbacks => "omniauth_callbacks"
               }
-  
+
   devise_scope :user do
     # get "/users/show/:id" => "users#show"
     resources :users, :only => [:show]
@@ -20,6 +20,8 @@ FeedxApp::Application.routes.draw do
 
     post 'subscribe', :on => :member
     put 'unsubscribe', :on => :member
+    put 'hide_on_profile', :on => :member
+    put 'show_on_profile', :on => :member
   end
 
   # get '/heyjude' => 'feeds#heyjude', as: :heyjude

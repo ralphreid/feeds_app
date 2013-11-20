@@ -6,6 +6,9 @@ $(function() {
   $('#subscribe.subscribe').one('click', subscribeToFeed);
   $('#subscribe.unsubscribe').one('click', unsubscribeFromFeed);
 
+  // feed level - option to mark a subscribed feed as private
+  $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
+
   // article level - archive and unarchive
   $('#archive.archive').one('click', archiveArticle);
   $('#archive.unarchive').one('click', unarchiveArticle);
@@ -29,14 +32,10 @@ $(function() {
         $subscribe.removeClass('subscribe');
         $subscribe.addClass('unsubscribe');
         $('#subscribe.unsubscribe').one('click', unsubscribeFromFeed);
+        $('#subscribe-visibility.hide-on-profile').show(); // provide option for user to hide this feed on profile right after subscribing
 
         var $subscribeCount = $('#subscribe-count').val();
-        $subscribeCount++;
-        if($subscribeCount == 1) {
-          $('#subscribe-count').html($subscribeCount + " subscriber")
-        } else {
-          $('#subscribe-count').html($subscribeCount + " subscribers")
-        }
+        updateSubscribeCountOnFeedShowPage($subscribeCount, "subscribe");
       },
       error: function() {
         console.log('ERROR');
@@ -59,14 +58,72 @@ $(function() {
         $subscribe.removeClass('unsubscribe');
         $subscribe.addClass('subscribe');
         $('#subscribe.subscribe').one('click', subscribeToFeed);
+        $('#subscribe-visibility').hide(); // no need for either 'hide on profile' or 'show on profile' if unsubscribed
 
         var $subscribeCount = $('#subscribe-count').val();
-        $subscribeCount - 1;
-        if($subscribeCount == 1) {
-          $('#subscribe-count').html($subscribeCount + " subscriber")
-        } else {
-          $('#subscribe-count').html($subscribeCount + " subscribers")
-        }
+        updateSubscribeCountOnFeedShowPage($subscribeCount, "unsubscribe");
+      },
+      error: function() {
+        console.log('ERROR');
+      }
+    });
+  }
+
+  function updateSubscribeCountOnFeedShowPage(currentCount, subscriptionStatus) {
+    // calculate
+    if(subscriptionStatus == "subscribe") {
+      currentCount++;
+    } else {
+      currentCount - 1;
+    }
+
+    // display
+    if(currentCount == 1) {
+      $('#subscribe-count').html(currentCount + " subscriber");
+    } else {
+      $('#subscribe-count').html(currentCount + " subscribers");
+    }
+  }
+
+  function setSubscribedFeedAsPrivate() {
+    console.log("about to set feed as private");
+    var $this = $(this);
+    var feedId = $this.data('feed-id');
+    var url = '/feeds/' + feedId + '/hide_on_profile';
+
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      success: function() {
+        var $subscribeVisibility = $('#subscribe-visibility');
+        $subscribeVisibility.html('Show on Profile');
+        $subscribeVisibility.removeClass('hide-on-profile');
+        $subscribeVisibility.addClass('show-on-profile');
+        $('#subscribe-visibility.show-on-profile').one('click', setSubscribedFeedAsPublic);
+        console.log("Set to private!");
+      },
+      error: function() {
+        console.log('ERROR');
+      }
+    });
+  }
+
+  function setSubscribedFeedAsPublic() {
+    console.log("about to set feed as public");
+    var $this = $(this);
+    var feedId = $this.data('feed-id');
+    var url = '/feeds/' + feedId + '/show_on_profile';
+
+    $.ajax({
+      url: url,
+      type: 'PUT',
+      success: function() {
+        var $subscribeVisibility = $('#subscribe-visibility');
+        $subscribeVisibility.html('Hide on Profile');
+        $subscribeVisibility.removeClass('show-on-profile');
+        $subscribeVisibility.addClass('hide-on-profile');
+        $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
+        console.log("Set to public!")
       },
       error: function() {
         console.log('ERROR');

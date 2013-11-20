@@ -24,4 +24,16 @@ class Subscription < ActiveRecord::Base
     subscribed_feeds = Subscription.where(:user_id => user_id) # search result returns an array
   end
 
+  def self.hide_subscribed_feed_on_user_profile(feed_id, user_id)
+    subscription = Subscription.where(:feed_id => feed_id, :user_id => user_id).first
+    subscription.show_on_profile = false
+    subscription.save
+  end
+
+  def self.show_subscribed_feed_on_user_profile(feed_id, user_id)
+    subscription = Subscription.where(:feed_id => feed_id, :user_id => user_id).first
+    subscription.show_on_profile = true
+    subscription.save
+  end
+
 end
