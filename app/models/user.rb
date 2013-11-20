@@ -57,5 +57,4 @@ class User < ActiveRecord::Base
     def assign_default_role
       self.role = "user" if self.role.nil?
     end
-
 end
