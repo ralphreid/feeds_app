@@ -7,6 +7,7 @@
       = button_to "Unsubscribe", {:controller => :feeds, :action => :unsubscribe}, {:method => :put }
     - else
       = button_to "Subscribe", {:controller => :feeds, :action => :subscribe}, {:method => :post }
+    %button.subscribe{"data-feed-id" => "#{@feed.id}"} Subscribe
 
 .feed-about
   %h4 About

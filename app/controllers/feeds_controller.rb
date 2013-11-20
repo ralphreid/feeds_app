@@ -22,5 +22,11 @@ class FeedsController < ApplicationController
     redirect_to feed_path(params[:id])
   end
 
+  def heyjude
+    puts
+    puts 'HEY JUDE'
+    puts
+  end
+
 end
 

@@ -7,6 +7,8 @@ FeedxApp::Application.routes.draw do
     put 'unsubscribe', :on => :member
   end
 
+  get '/heyjude' => 'feeds#heyjude', as: :heyjude
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

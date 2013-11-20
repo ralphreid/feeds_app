@@ -1,0 +1,9 @@
+%h2 Add a Feed
+
+= form_for @subscription do |f|
+  = f.label :feed_id, Feed.where("id = #{feed_id}").first.title
+  %br/
+  = f.label :category
+  = f.text_field :category
+  %br/
+  = f.submit
