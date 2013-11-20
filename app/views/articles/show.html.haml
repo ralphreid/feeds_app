@@ -28,7 +28,7 @@
           = link_to "Remove Bookmark", "javascript:void(0)", :id => "bookmark", :class => "unbookmark", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
         - else
           = link_to "Bookmark", "javascript:void(0)", :id => "bookmark", :class => "bookmark", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
-    %li Share on Google Plus
+    %li= link_to "Share on Google Plus", "https://plus.google.com/share?url=#{@article.link}", :target => "blank"
     %li= link_to "Read on #{@article.feed.title}", @article.link
 
 %hr
