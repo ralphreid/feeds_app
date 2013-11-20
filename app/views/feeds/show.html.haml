@@ -14,6 +14,7 @@
       %button#subscribe-visibility.hide-on-profile{"data-feed-id" => "#{@feed.id}"} Hide on Profile
     - else
       %button#subscribe.subscribe{"data-feed-id" => "#{@feed.id}"} Subscribe
+      %button#subscribe-visibility.hidden{"data-feed-id" => "#{@feed.id}"} Hide on Profile
 
 .feed-about
   %h4 About

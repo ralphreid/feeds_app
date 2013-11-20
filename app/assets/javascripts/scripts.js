@@ -8,6 +8,7 @@ $(function() {
 
   // feed level - option to mark a subscribed feed as private
   $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
+  $('#subscribe-visibility.show-on-profile').one('click', setSubscribedFeedAsPublic);
 
   // article level - archive and unarchive
   $('#archive.archive').one('click', archiveArticle);
@@ -32,7 +33,10 @@ $(function() {
         $subscribe.removeClass('subscribe');
         $subscribe.addClass('unsubscribe');
         $('#subscribe.unsubscribe').one('click', unsubscribeFromFeed);
-        $('#subscribe-visibility.hide-on-profile').show(); // provide option for user to hide this feed on profile right after subscribing
+        $('#subscribe-visibility').removeClass('hidden'); // provide option for user to hide this feed on profile right after subscribing for the first time
+        $('#subscribe-visibility').show(); // for when a user subscribes then unsubscribes (which .hide() this button) then subscribes again...
+        $('#subscribe-visibility').addClass('hide-on-profile');
+        $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
 
         var $subscribeCount = $('#subscribe-count').val();
         updateSubscribeCountOnFeedShowPage($subscribeCount, "subscribe");
