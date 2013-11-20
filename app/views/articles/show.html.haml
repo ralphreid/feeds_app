@@ -22,14 +22,12 @@
     %li= link_to "Read on #{@article.feed.title}", @article.link
 
 %hr
-.article-summary
-/ this works in the console, can always run with just @article.description if it doesn't in the browser
-- if @article.content.present?
-  = @article.content
-- else
-  = @article.description
-
+.article.article_img_show_page
+  =image_tag @article.images_from_readable.first
+.article.content_show_page
+  = sanitize @article.content_from_readable, tags: %w(table tr td), attributes: %w(id class style)
 %hr
+
 / insert a nav_bar here i.e archieve | bookmark | share on google | @article.comment_link(<-this one should work fine)
 
 %hr
