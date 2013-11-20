@@ -1,7 +1,7 @@
 %h2 Feeds List
 
 %table
-  -@feeds.each do |feed|
+  - @feeds.each do |feed|
     %tr
       .feed_list
         %td= link_to feed.title, feed_path(feed)
