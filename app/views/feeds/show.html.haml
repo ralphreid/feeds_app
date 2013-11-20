@@ -1,5 +1,6 @@
 %h2= @feed.title # need to add subscribe/unsubscribe button too
 
+
 .feed-subscribe
   / = button_to "Subscribe", '/subscriptions#update', remote: true, method: :put
   / - if user_signed_in?

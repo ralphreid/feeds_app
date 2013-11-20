@@ -4,10 +4,18 @@ class FeedsController < ApplicationController
     @feeds = Feed.all
   end
 
+  def public_home
+    #render public home page
+  end
+
   def show
-    @feed = Feed.find params[:id]
-    Article.get_articles_from_feed(@feed)
-    @articles = @feed.articles
+    begin
+      @feed = Feed.find params[:id]
+      Article.get_articles_from_feed(@feed)
+      @articles = @feed.articles
+    rescue ActiveRecord::RecordNotFound
+      redirect_to feed_not_found_path
+    end
   end
 
   def subscribe
@@ -39,5 +47,12 @@ class FeedsController < ApplicationController
     render json: output
   end
 
+  def find
+    if params[:title]
+      @feeds = Feed.where("title LIKE ? AND category LIKE ?", "%#{params[:title]}%", "%#{params[:category]}%")
+    else
+      @feed = Feed.new
+    end
+  end
 end
 
