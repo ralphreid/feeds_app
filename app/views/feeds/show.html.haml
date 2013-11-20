@@ -1,13 +1,19 @@
 %h2= @feed.title # need to add subscribe/unsubscribe button too
 
-#feed-subscribe-button
+.feed-subscribe
   / = button_to "Subscribe", '/subscriptions#update', remote: true, method: :put
   - if user_signed_in?
     - if @feed.users.where("user_id = #{current_user.id}").present?
       = button_to "Unsubscribe", {:controller => :feeds, :action => :unsubscribe}, {:method => :put }
     - else
       = button_to "Subscribe", {:controller => :feeds, :action => :subscribe}, {:method => :post }
-    %button.subscribe{"data-feed-id" => "#{@feed.id}"} Subscribe
+  Javascript version below:
+  %br/
+  - if user_signed_in?
+    - if @feed.users.where("user_id = #{current_user.id}").present?
+      %button#subscribe.unsubscribe{"data-feed-id" => "#{@feed.id}"} Unsubscribe
+    - else
+      %button#subscribe.subscribe{"data-feed-id" => "#{@feed.id}"} Subscribe
 
 .feed-about
   %h4 About
