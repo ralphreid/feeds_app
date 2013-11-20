@@ -20,7 +20,8 @@ gem 'devise'
 
 gem 'feedzirra'
 
-
+gem 'ruby-readability', :require => 'readability'
+gem 'fastimage'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
