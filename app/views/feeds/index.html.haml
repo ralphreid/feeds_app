@@ -1,9 +1,11 @@
-%h2 Feeds List
+%h4 Feeds
 
-%table
+%table.feed-list
   -@feeds.each do |feed|
     %tr
-      .feed_list
+      .feed-list-item
         %td= link_to feed.title, feed_path(feed.id)
-        %td Unsubscribe Control HERE
-        %td Subscribe Control HERE
+      .feed-unsubscribe
+        %td Unsubscribe
+      .feed-subscribe
+        %td Subscribe
