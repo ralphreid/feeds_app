@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131119160551) do
+ActiveRecord::Schema.define(:version => 20131120135333) do
 
   create_table "articles", :force => true do |t|
     t.integer  "feed_id"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(:version => 20131119160551) do
     t.string   "role"
     t.text     "image"
     t.string   "bio"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
