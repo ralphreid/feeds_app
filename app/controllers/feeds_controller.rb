@@ -1,8 +1,7 @@
 class FeedsController < ApplicationController
-  load_and_authorize_resource
 
   def index
-
+    @feeds = Feed.all
   end
 
   def show
