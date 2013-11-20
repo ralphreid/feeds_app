@@ -4,6 +4,10 @@ class FeedsController < ApplicationController
     @feeds = Feed.all
   end
 
+  def public_home
+    #render public home page
+  end
+
   def show
     @feed = Feed.find params[:id]
     Article.get_articles_from_feed(@feed)

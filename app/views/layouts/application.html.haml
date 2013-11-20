@@ -6,15 +6,15 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-
     .container
       %nav.nav-bar
+        %nav.left-nav.logo
+          %h4= link_to "Feedx", root_path
         %nav.left-nav
-          %h2= link_to "Feedx", root_path
           - if user_signed_in?
             = link_to 'My Feeds', feeds_path
             \|
-          = link_to 'Find a Feed', new_feed_path # update link later! should be a 'search or browse by categories' type page
+            = link_to 'Find a Feed', new_feed_path # update link later! should be a 'search or browse by categories' type page
         %nav.right-nav
           - if user_signed_in?
             Logged in as

@@ -28,7 +28,6 @@ Feed.get_feed("http://feeds.venturebeat.com/VentureBeat", "business")
 Feed.get_feed("http://feeds.feedburner.com/AVcVentureCapitalAndTechnology", "business")
 Feed.get_feed("http://feeds.feedburner.com/AtlanticBusinessChannel", "business")
 
-feed = Feedzirra::Feed.fetch_and_parse("http://feeds.feedburner.com/PaulDixExplainsNothing")
 
 # news
 Feed.get_feed("http://feeds.bbci.co.uk/news/technology/rss.xml", "news")
