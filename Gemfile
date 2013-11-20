@@ -17,6 +17,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'will_paginate'
 
 gem 'devise'
+gem 'omniauth-google-oauth2'
 
 gem 'feedzirra'
 

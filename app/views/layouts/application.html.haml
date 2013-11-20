@@ -28,6 +28,8 @@
             = link_to "Sign up", new_user_registration_path
             \|
             = link_to "Sign in", new_user_session_path
+            \|
+            = link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)
 
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_ #{name}"
