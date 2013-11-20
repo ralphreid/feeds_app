@@ -10,18 +10,19 @@ class Feed < ActiveRecord::Base
   has_many :subscriptions
   has_many :users, :through => :subscriptions
 
-  def self.get_feed(rss)
+  def self.get_feed(rss, category)
     feed = Feedzirra::Feed.fetch_and_parse(rss)
-    add_feed(feed)
+    add_feed(feed, category)
   end
 
-  def self.add_feed(feed)
-    f = Feed.where(:rss => feed.rss).first_or_create
+  def self.add_feed(feed, category=nil)
+    f = Feed.where(:rss => feed.feed_url).first_or_create
     f.title = feed.title
     f.rss = feed.feed_url
     f.link = feed.url
     f.guid = feed.etag
     f.last_modified = feed.last_modified
+    f.category = category
     f.save!
   end
 
