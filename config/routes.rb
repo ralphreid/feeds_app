@@ -3,16 +3,22 @@ FeedxApp::Application.routes.draw do
   # , :path_prefix => 'my'
   devise_scope :user do
     # get "/users/show/:id" => "users#show"
-    resources :users, :only => [:show] 
+    resources :users, :only => [:show]
   end
 
   resources :feeds do
-    resources :articles
+    resources :articles do
+      post 'bookmark', :on => :member
+      put 'unbookmark', :on => :member
+      post 'archive', :on => :member
+      put 'unarchive', :on => :member
+    end
+
     post 'subscribe', :on => :member
     put 'unsubscribe', :on => :member
   end
 
-  get '/heyjude' => 'feeds#heyjude', as: :heyjude
+  # get '/heyjude' => 'feeds#heyjude', as: :heyjude
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
