@@ -19,37 +19,39 @@
   / %ul
   /   %li
   /     - if user_signed_in?
-  /       - if @article.users.where("user_id = #{current_user.id}").present?
+  /       - if @article.users.where("user_id = 7 AND archive = true").present?
   /         = link_to "Unarchive", "javascript:void(0)", :id => "archive", :class => "unarchive", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
   /       - else
   /         = link_to "Archive", "javascript:void(0)", :id => "archive", :class => "archive", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
   /   %li
   /     - if user_signed_in?
-  /       - if @article.users.where("user_id = #{current_user.id}").present?
+  /       - @article.users.where("user_id = 7 AND bookmark = true").present?
   /         = link_to "Remove Bookmark", "javascript:void(0)", :id => "bookmark", :class => "unbookmark", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
   /       - else
   /         = link_to "Bookmark", "javascript:void(0)", :id => "bookmark", :class => "bookmark", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
   /   %li= link_to "Share on Google Plus", "https://plus.google.com/share?url=#{@article.link}", :target => "blank"
   /   %li= link_to "Read on #{@article.feed.title}", @article.link
   / BUTTON VERSION
-  - if user_signed_in?
-    - if @article.users.where("user_id = 7 AND archive = true").present?
-      %button#archive.unarchive{"data-article-id" => "#{@article.id}"} Unarchive
-    - else
-      %button#archive.archive{"data-article-id" => "#{@article.id}"} Archive
-    - if @article.users.where("user_id = 7 AND bookmark = true").present?
-      %button#bookmark.unbookmark{"data-article-id" => "#{@article.id}"} Unbookmark
-    - else
-      %button#bookmark.bookmark{"data-article-id" => "#{@article.id}"} Bookmark
+  .article-user-labels
+    - if user_signed_in?
+      - if @article.users.where("user_id = 7 AND archive = true").present?
+        %button#archive.unarchive{"data-article-id" => "#{@article.id}"} Unarchive
+      - else
+        %button#archive.archive{"data-article-id" => "#{@article.id}"} Archive
+      - if @article.users.where("user_id = 7 AND bookmark = true").present?
+        %button#bookmark.unbookmark{"data-article-id" => "#{@article.id}"} Unbookmark
+      - else
+        %button#bookmark.bookmark{"data-article-id" => "#{@article.id}"} Bookmark
+  .article-external-link
+    = button_to "Read/Comment on #{@article.feed.title}", @article.link, target: "blank"
+    %p
+  .g-plus{"data-action" => "share", "data-href" => "#{@article.link}"}
 
 %hr
 .article.article_img_show_page
   =image_tag @article.images_from_readable.first
 .article.content_show_page
   = sanitize @article.content_from_readable, tags: %w(table tr td), attributes: %w(id class style)
-%hr
-
-/ insert a nav_bar here i.e archieve | bookmark | share on google | @article.comment_link(<-this one should work fine)
 
 %hr
 %nav.nav_bottom
@@ -58,8 +60,12 @@
   Previous Post
 /figure out logic for next and previous
 
-
-
+:javascript
+(function() {
+  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+  po.src = 'https://apis.google.com/js/platform.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
 
 
 

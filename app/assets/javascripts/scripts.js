@@ -193,7 +193,7 @@ $(function() {
       type: 'POST',
       success: function() {
         var $bookmark = $('#bookmark');
-        $bookmark.html('Remove Bookmark');
+        $bookmark.html('Unbookmark');
         $bookmark.removeClass('bookmark');
         $bookmark.addClass('unbookmark');
         $('#bookmark.unbookmark').one('click', unbookmarkArticle);
