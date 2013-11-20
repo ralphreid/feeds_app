@@ -29,5 +29,19 @@ class FeedsController < ApplicationController
     render json: output
   end
 
+  def hide_on_profile
+    Subscription.hide_subscribed_feed_on_user_profile(params[:id], current_user.id)
+
+    output = {'status' => 'ok'}.to_json
+    render json: output
+  end
+
+  def show_on_profile
+    Subscription.show_subscribed_feed_on_user_profile(params[:id], current_user.id)
+
+    output = {'status' => 'ok'}.to_json
+    render json: output
+  end
+
 end
 

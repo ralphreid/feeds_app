@@ -4,6 +4,6 @@
   -@feeds.each do |feed|
     %tr
       .feed_list
-        %td=feed.title
+        %td= link_to feed.title, feed_path(feed)
         %td Unsubscribe Control HERE
         %td Subscribe Control HERE

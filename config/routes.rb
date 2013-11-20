@@ -20,6 +20,8 @@ FeedxApp::Application.routes.draw do
 
     post 'subscribe', :on => :member
     put 'unsubscribe', :on => :member
+    put 'hide_on_profile', :on => :member
+    put 'show_on_profile', :on => :member
   end
 
   get '/public_home', to: 'feeds#public_home', as: :public_home
