@@ -16,8 +16,18 @@
 .article-nav
   / insert a nav_bar here i.e archieve | bookmark | share on google | @article.comment_link(<-this one should work fine)
   %ul
-    %li Archive
-    %li Bookmark
+    %li
+      - if user_signed_in?
+        - if @article.users.where("user_id = #{current_user.id}").present?
+          = link_to "Unarchive", "javascript:void(0)", :id => "archive", :class => "unarchive", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
+        - else
+          = link_to "Archive", "javascript:void(0)", :id => "archive", :class => "archive", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
+    %li
+      - if user_signed_in?
+        - if @article.users.where("user_id = #{current_user.id}").present?
+          = link_to "Remove Bookmark", "javascript:void(0)", :id => "bookmark", :class => "unbookmark", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
+        - else
+          = link_to "Bookmark", "javascript:void(0)", :id => "bookmark", :class => "bookmark", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
     %li Share on Google Plus
     %li= link_to "Read on #{@article.feed.title}", @article.link
 
