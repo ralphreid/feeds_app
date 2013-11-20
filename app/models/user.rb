@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
           :rememberable,
           :trackable,
           :validatable,
-          :timeoutable
+          :timeoutable,
+          :omniauthable,
+          :omniauth_providers => [:google_oauth2]
          # , :confirmable, :confirm_within => 1.hour
 
   # Setup accessible (or protected) attributes for your model
