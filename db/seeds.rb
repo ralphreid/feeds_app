@@ -29,7 +29,6 @@ Feed.get_feed("http://feeds.feedburner.com/AVcVentureCapitalAndTechnology", "bus
 Feed.get_feed("http://feeds.feedburner.com/AtlanticBusinessChannel", "business")
 
 
-
 # news
 Feed.get_feed("http://feeds.bbci.co.uk/news/technology/rss.xml", "news")
 Feed.get_feed("http://blogs.cbn.com/HurdontheWeb/Rss.aspx", "news")

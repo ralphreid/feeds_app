@@ -6,11 +6,11 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-
     .container
       %nav.nav-bar
+        %nav.left-nav.logo
+          %h4= link_to "Feedx", root_path
         %nav.left-nav
-          %h2= link_to "Feedx", root_path
           - if user_signed_in?
             = link_to 'My Feeds', feeds_path
             \|

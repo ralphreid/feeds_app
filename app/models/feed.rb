@@ -1,3 +1,4 @@
+
 class Feed < ActiveRecord::Base
 
   attr_accessible :title, :link, :rss, :provider, :category, :description, :image_link, :image_title, :guid, :last_modified

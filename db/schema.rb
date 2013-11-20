@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131120155840) do
+ActiveRecord::Schema.define(:version => 20131120135333) do
 
   create_table "articles", :force => true do |t|
     t.integer  "feed_id"
@@ -57,9 +57,8 @@ ActiveRecord::Schema.define(:version => 20131120155840) do
     t.integer  "feed_id"
     t.integer  "user_id"
     t.string   "category"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.boolean  "show_on_profile"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "subscriptions", ["feed_id"], :name => "index_subscriptions_on_feed_id"
