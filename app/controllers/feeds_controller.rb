@@ -8,6 +8,10 @@ class FeedsController < ApplicationController
     #render public home page
   end
 
+  def categories
+    @feeds = Feed.where("category LIKE ?", "%#{params[:category]}%")
+  end
+
   def show
     begin
       @feed = Feed.find params[:id]

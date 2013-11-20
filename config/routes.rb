@@ -11,6 +11,7 @@ FeedxApp::Application.routes.draw do
   end
 
   match '/feeds/find' => 'feeds#find', as: :find_feed
+  match '/feeds/categories' => 'feeds#categories', as: :categories_feed
 
   resources :feeds do
     resources :articles do

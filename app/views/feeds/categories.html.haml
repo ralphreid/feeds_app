@@ -1,14 +1,11 @@
 .feed-views-header
-  %h4 Find Feed
+  %h2= params[:category].capitalize
 
-= render :partial => 'form'
-
-.feed-results.search
+.feed-results.categories
   - unless @feeds.nil?
     - if @feeds.empty?
       No results found
     - else
-      %h2 Results
       %ul
         - @feeds.each do |feed|
           %li
