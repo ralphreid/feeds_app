@@ -18,11 +18,11 @@
 .article-nav
   .article-user-labels
     - if user_signed_in?
-      - if @article.users.where("user_id = 7 AND archive = true").present?
+      - if @article.users.where("user_id = #{current_user.id} AND archive = true").present?
         %button#archive.unarchive{"data-article-id" => "#{@article.id}"} Unarchive
       - else
         %button#archive.archive{"data-article-id" => "#{@article.id}"} Archive
-      - if @article.users.where("user_id = 7 AND bookmark = true").present?
+      - if @article.users.where("user_id = #{current_user.id} AND bookmark = true").present?
         %button#bookmark.unbookmark{"data-article-id" => "#{@article.id}"} Unbookmark
       - else
         %button#bookmark.bookmark{"data-article-id" => "#{@article.id}"} Bookmark
