@@ -1,11 +1,33 @@
-%h2 Profile
-.user-show-top-nav
+%h2= "#{@user.first_name}'s Profile"
 
 .user-show-image
-  = image_tag @image
-.user-contact-info
-  = @user.first_name
-  = @user.last_name
+  = image_tag @image, height: 150
+
+.user-basic-info
+  %b= @user.first_name.capitalize
+  %b= @user.last_name.capitalize
+  %br/
+  = "Member since #{@user.created_at.to_formatted_s(:long)}"
+
 .user-bio
-  = @user.bio
-.user-show-bottom-nav
+  = @user.bio if @user.bio.present?
+
+.user-public-feeds
+  %h4= "#{@user.first_name} is following..."
+  %ul
+  - @user_public_feeds.each do |f|
+    %li
+      %b= link_to f.title, feed_path(f)
+      |
+      %i= link_to f.category, "/feeds/categories?category=#{f.category}"
+
+.user-private-feeds
+  - if current_user == @user
+    %h4
+      = "[PRIVATE] #{@user.first_name}, here are your private feeds:"
+    %ul
+    - @user_private_feeds.each do |f|
+      %li
+        %b= link_to f.title, feed_path(f)
+        |
+        %i= link_to f.category, "/feeds/categories?category=#{f.category}"

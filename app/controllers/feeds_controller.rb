@@ -32,8 +32,6 @@ class FeedsController < ApplicationController
     end
   end
 
-
-
   def show
     begin
       @feed = Feed.find params[:id]
