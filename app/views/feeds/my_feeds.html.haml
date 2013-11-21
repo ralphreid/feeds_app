@@ -5,15 +5,10 @@
   %ul
     %li= link_to feed.title, feed_path(feed.id)
     %ul
-      %li= feed.articles.first.title
+      - feed.articles.find(:all, :order => "id desc", :limit => 5).each do |article|
+        %li= article.title
 
-
-    / %ul
-    /   - feed.articles.find(:all, :order => "id desc", :limit => 5).each do |article|
-    /   %li= articile.title
-
-
-
+= will_paginate @my_feeds
 
 
 
