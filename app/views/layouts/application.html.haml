@@ -38,16 +38,15 @@
 
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_ #{name}"
-    %hr/
-
+            
     = yield
 
-    %hr/
-
-    %footer
-      %small
-        2013 Feedx
-        \|
+    %footer.footer
+      .codeship
+        = image_tag "https://www.codeship.io/projects/f7cd8760-34f5-0131-8243-4a9df5e68050/status?branch=master"
+      .feedx_symbol
+        feed_X
+      .bottom-nav
         = link_to 'About', page_path('about')
 
 
