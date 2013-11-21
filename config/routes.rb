@@ -14,6 +14,8 @@ FeedxApp::Application.routes.draw do
   match '/feeds/categories' => 'feeds#categories', as: :categories_feed
   match '/feeds/my_feeds' => 'feeds#my_feeds', as: :my_feeds
 
+  match '/articles/my_bookmarks' => 'articles#my_bookmarks', as: :my_bookmarks
+
   resources :feeds do
     resources :articles do
       post 'bookmark', :on => :member
@@ -88,7 +90,7 @@ FeedxApp::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # Required Devise config: "Ensure you have defined root_url to *something* in your config/routes.rb"
-  root :to => 'feeds#public_home' # change later
+  root :to => 'feeds#public_home'
 
   # See how all your routes lay out with "rake routes"
 
