@@ -19,7 +19,6 @@ $(function() {
   $('#bookmark.unbookmark').one('click', unbookmarkArticle);
 
   function subscribeToFeed() {
-    console.log('subs');
     var $this = $(this);
     var feedId = $this.data('feed-id');
     var url = '/feeds/' + feedId + '/subscribe';
@@ -38,8 +37,11 @@ $(function() {
         $visibility.addClass('hide-on-profile');
         $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
 
-        var $subscribeCount = $('#subscribe-count').val();
-        updateSubscribeCountOnFeedShowPage($subscribeCount, "subscribe");
+        if(window.location.pathname == "/feeds/"+feedId) {
+          var $subscribeCount = $('#subscribe-count').val();
+          updateSubscribeCountOnFeedShowPage($subscribeCount, "subscribe");
+        }
+
       },
       error: function() {
         console.log('ERROR');
@@ -48,7 +50,6 @@ $(function() {
   }
 
   function unsubscribeFromFeed() {
-    console.log('unsubs');
     var $this = $(this);
     var feedId = $this.data('feed-id');
     var url = '/feeds/' + feedId + '/unsubscribe';
@@ -64,8 +65,10 @@ $(function() {
         $('#subscribe.subscribe').one('click', subscribeToFeed);
         $('#subscribe-visibility').addClass('hidden'); // no need for either 'hide on profile' or 'show on profile' if unsubscribed
 
-        var $subscribeCount = $('#subscribe-count').val();
-        updateSubscribeCountOnFeedShowPage($subscribeCount, "unsubscribe");
+        if(window.location.pathname == "/feeds/"+feedId) {
+          var $subscribeCount = $('#subscribe-count').val();
+          updateSubscribeCountOnFeedShowPage($subscribeCount, "unsubscribe");
+        }
       },
       error: function() {
         console.log('ERROR');
@@ -220,6 +223,10 @@ $(function() {
         $bookmark.removeClass('unbookmark');
         $bookmark.addClass('bookmark');
         $('#bookmark.bookmark').one('click', bookmarkArticle);
+
+        if(window.location.pathname == "/articles/my_bookmarks") {
+          location.reload();
+        }
       },
       error: function() {
         console.log('ERROR');
