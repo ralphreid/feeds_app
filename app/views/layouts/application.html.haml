@@ -49,5 +49,8 @@
         2013 Feedx
         \|
         = link_to 'About', page_path('about')
+        \|
+        - if user_signed_in?
+          = link_to 'Users', users_path
 
 

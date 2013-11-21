@@ -40,12 +40,13 @@
 %hr
 %nav.nav_bottom
   = link_to "Back to Feed", feed_path(@article.feed)
-  - if @next_article_id
-    \|
-    = link_to "Next Post", feed_article_path(@article.feed, @next_article_id)
   - if @previous_article_id
     \|
     = link_to "Previous Post", feed_article_path(@article.feed, @previous_article_id)
+  - if @next_article_id
+    \|
+    = link_to "Next Post", feed_article_path(@article.feed, @next_article_id)
+
 
 :javascript
 (function() {
