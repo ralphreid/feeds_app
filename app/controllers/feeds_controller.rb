@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
 
   def index
-    @feeds = Feed.all
+    redirect_to root_path
   end
 
   def public_home

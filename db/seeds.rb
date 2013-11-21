@@ -16,6 +16,7 @@ Article.delete_all
 # Commented out: Need REAL RSS link
 # technology
 Feed.get_feed("http://feeds2.feedburner.com/techradar/computing-news", "technology")
+
 Feed.get_feed("http://feeds.mashable.com/Mashable", "technology")
 Feed.get_feed("http://feeds.gawker.com/lifehacker/full", "technology")
 Feed.get_feed("http://feeds.feedburner.com/TechViral", "technology")
@@ -27,6 +28,7 @@ Feed.get_feed("http://mf.feeds.reuters.com/reuters/UKTopNews", "business")
 Feed.get_feed("http://feeds.venturebeat.com/VentureBeat", "business")
 Feed.get_feed("http://feeds.feedburner.com/AVcVentureCapitalAndTechnology", "business")
 Feed.get_feed("http://feeds.feedburner.com/AtlanticBusinessChannel", "business")
+
 
 
 # news

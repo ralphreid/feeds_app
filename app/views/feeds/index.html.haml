@@ -1,12 +1,2 @@
-%h4 Feeds
-
-%table.feed-list
-  -@feeds.each do |feed|
-    %tr
-      .feed-list-item
-        %td= link_to feed.title, feed_path(feed.id)
-      .feed-unsubscribe
-        %td Unsubscribe
-      .feed-subscribe
-        %td Subscribe
+/ redirects to public home page
 
