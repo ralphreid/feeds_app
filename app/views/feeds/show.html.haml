@@ -1,18 +1,14 @@
 .feed-views-header
-  %h2= @feed.title # need to add subscribe/unsubscribe button too
+  %h2= @feed.title
 
 .feed-subscribe
-  / = button_to "Subscribe", '/subscriptions#update', remote: true, method: :put
-  / - if user_signed_in?
-  /   - if @feed.users.where("user_id = #{current_user.id}").present?
-  /     = button_to "Unsubscribe", {:controller => :feeds, :action => :unsubscribe}, {:method => :put }
-  /   - else
-  /     = button_to "Subscribe", {:controller => :feeds, :action => :subscribe}, {:method => :post }
-  / Javascript version below:
   - if user_signed_in?
     - if @feed.users.where("user_id = #{current_user.id}").present?
       %button#subscribe.unsubscribe{"data-feed-id" => "#{@feed.id}"} Unsubscribe
-      %button#subscribe-visibility.hide-on-profile{"data-feed-id" => "#{@feed.id}"} Hide on Profile
+      - if Subscription.where(:feed_id => @feed.id, :user_id => current_user.id, :show_on_profile => true).present?
+        %button#subscribe-visibility.hide-on-profile{"data-feed-id" => "#{@feed.id}"} Hide on Profile
+      - else
+        %button#subscribe-visibility.show-on-profile{"data-feed-id" => "#{@feed.id}"} Show on Profile
     - else
       %button#subscribe.subscribe{"data-feed-id" => "#{@feed.id}"} Subscribe
       %button#subscribe-visibility.hidden{"data-feed-id" => "#{@feed.id}"} Hide on Profile
