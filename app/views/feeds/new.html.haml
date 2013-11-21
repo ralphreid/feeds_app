@@ -1,0 +1,33 @@
+%h2 Add a Feed
+
+- if @feed.errors.any?
+  .error-messages
+    %h2 Uh-oh...
+    %ul
+      - @feed.errors.full_messages.each do |message|
+        %li= message
+
+- if user_signed_in?
+  = form_for(@feed, html: {class: 'add-feed-form'}) do |f|
+    %fieldset
+      %legend Feed Details
+      .field
+        = f.label :rss, "Feed RSS Link"
+        %br/
+        = f.url_field :rss
+        %br/
+      .field
+        = f.label :category, "Feed Category"
+        %br/
+        = f.select :category, options_for_select(Feed.uniq.pluck(:category), @feed.category), include_blank: true
+        %br/
+      .field
+        = label_tag :category_new, "Feed category not found above? Add your own:" # note this is NOT f.
+        %br/
+        = text_field_tag :category_new # note this is NOT f.
+        %br/
+      .actions
+        = f.submit
+
+- else
+  You must be registered and logged in to add a feed.
