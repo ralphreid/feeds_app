@@ -271,4 +271,8 @@ $(function() {
     });
   }
 
+  $("img").error(function () {
+    $(this).css({visibility:"hidden"});
+  });
+
 });

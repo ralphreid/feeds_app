@@ -7,7 +7,7 @@ FeedxApp::Application.routes.draw do
 
   devise_scope :user do
     # get "/users/show/:id" => "users#show"
-    resources :users, :only => [:show]
+    resources :users, :only => [:show, :index]
   end
 
   match '/feeds/find' => 'feeds#find', as: :find_feed

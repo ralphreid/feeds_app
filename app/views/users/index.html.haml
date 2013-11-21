@@ -1,0 +1,9 @@
+%h2 Users List
+
+
+%table
+  -@users.each do |user|
+    %ul
+      .user_list
+        %li= link_to "#{user.first_name} #{user.last_name}", user_path(user)
+

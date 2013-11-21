@@ -1,0 +1,75 @@
+
+/*******
+* TOOLS *
+********/
+*,*:before,*:after{
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+/*******
+* LAYOUT  *
+********/
+// .feedx_symbol {
+//   border-radius: 50%;
+//   width: 90px;
+//   height: 90px;
+//   background-color: black;
+//   color: white;
+//   text-align: center;
+//   line-height: 20px;
+//   font-size: 22px;
+// }
+
+
+// .feedx_symbol {
+//   // background: radial-gradient( 5px -9px, circle, white 8%, red 26px );
+//   // background:    -moz-radial-gradient( 5px -9px, circle, white 8%, red 26px );
+//   // background:     -ms-radial-gradient( 5px -9px, circle, white 8%, red 26px );
+//   // background:      -o-radial-gradient( 5px -9px, circle, white 8%, red 26px );
+//   // background: -webkit-radial-gradient( 5px -9px, circle, white 8%, red 26px );
+//   background-color: black;
+//   border: 2px solid white;
+//   border-radius: 36px; /* one half of ( (border * 2) + height + padding ) */
+//   box-shadow: 1px 1px 1px black;
+//   color: white;
+//   font: bold 15px/13px Helvetica, Verdana, Tahoma;
+//   height: 16px; 
+//   padding: 4px 3px 0 3px;
+//   text-align: center;
+//   min-width: 34px;
+//   float: left;
+//     // left: 25px;
+//     // margin: 6px;
+//     // position: relative;
+//     // top: 25px; 
+// }
+
+.feedx_symbol {
+  width:150px;
+  height:150px;
+  border-radius:75px;
+  font-size:30px;
+  color:#fff;
+  line-height:150px;
+  text-align:center;
+  background:#000
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
