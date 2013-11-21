@@ -27,15 +27,19 @@ $(function() {
       url: url,
       type: 'POST',
       success: function() {
-        var $subscribe = $('#subscribe');
-        var $visibility = $('#subscribe-visibility');
-        $subscribe.html('Unsubscribe');
-        $subscribe.removeClass('subscribe');
-        $subscribe.addClass('unsubscribe');
-        $('#subscribe.unsubscribe').one('click', unsubscribeFromFeed);
-        $visibility.removeClass('hidden'); // provide option for user to hide this feed on profile right after subscribing for the first time
-        $visibility.addClass('hide-on-profile');
-        $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
+        if(window.location.pathname != "/feeds/my_feeds") {
+          var $subscribe = $('#subscribe');
+          var $visibility = $('#subscribe-visibility');
+          $subscribe.html('Unsubscribe');
+          $subscribe.removeClass('subscribe');
+          $subscribe.addClass('unsubscribe');
+          $('#subscribe.unsubscribe').one('click', unsubscribeFromFeed);
+          $visibility.removeClass('hidden'); // provide option for user to hide this feed on profile right after subscribing for the first time
+          $visibility.addClass('hide-on-profile');
+          $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
+        } else {
+          location.onload();
+        }
 
         if(window.location.pathname == "/feeds/"+feedId) {
           var $subscribeCount = $('#subscribe-count').val();
@@ -58,17 +62,21 @@ $(function() {
       url: url,
       type: 'PUT',
       success: function() {
-        var $subscribe = $('#subscribe');
-        $subscribe.html('Subscribe');
-        $subscribe.removeClass('unsubscribe');
-        $subscribe.addClass('subscribe');
-        $('#subscribe.subscribe').one('click', subscribeToFeed);
-        $('#subscribe-visibility').addClass('hidden'); // no need for either 'hide on profile' or 'show on profile' if unsubscribed
+        if(window.location.pathname != "/feeds/my_feeds") {
+          var $subscribe = $('#subscribe');
+          $subscribe.html('Subscribe');
+          $subscribe.removeClass('unsubscribe');
+          $subscribe.addClass('subscribe');
+          $('#subscribe.subscribe').one('click', subscribeToFeed);
+          $('#subscribe-visibility').addClass('hidden'); // no need for either 'hide on profile' or 'show on profile' if unsubscribed
+        } else {
+          location.onload();
+        }
 
         if(window.location.pathname == "/feeds/"+feedId) {
           var $subscribeCount = $('#subscribe-count').val();
           updateSubscribeCountOnFeedShowPage($subscribeCount, "unsubscribe");
-        }
+        };
       },
       error: function() {
         console.log('ERROR');
@@ -102,12 +110,16 @@ $(function() {
       url: url,
       type: 'PUT',
       success: function() {
-        var $subscribeVisibility = $('#subscribe-visibility');
-        $subscribeVisibility.html('Show on Profile');
-        $subscribeVisibility.removeClass('hide-on-profile');
-        $subscribeVisibility.addClass('show-on-profile');
-        $('#subscribe-visibility.show-on-profile').one('click', setSubscribedFeedAsPublic);
-        console.log("Set to private!");
+        if(window.location.pathname != "/feeds/my_feeds" && window.location.pathname != "/articles/my_bookmarks") {
+          var $subscribeVisibility = $('#subscribe-visibility');
+          $subscribeVisibility.html('Show on Profile');
+          $subscribeVisibility.removeClass('hide-on-profile');
+          $subscribeVisibility.addClass('show-on-profile');
+          $('#subscribe-visibility.show-on-profile').one('click', setSubscribedFeedAsPublic);
+          console.log("Set to private!");
+        } else {
+          location.reload();
+        }
       },
       error: function() {
         console.log('ERROR');
@@ -125,12 +137,17 @@ $(function() {
       url: url,
       type: 'PUT',
       success: function() {
-        var $subscribeVisibility = $('#subscribe-visibility');
-        $subscribeVisibility.html('Hide on Profile');
-        $subscribeVisibility.removeClass('show-on-profile');
-        $subscribeVisibility.addClass('hide-on-profile');
-        $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
-        console.log("Set to public!")
+
+        if(window.location.pathname != "/feeds/my_feeds" && window.location.pathname != "/articles/my_bookmarks") {
+          var $subscribeVisibility = $('#subscribe-visibility');
+          $subscribeVisibility.html('Hide on Profile');
+          $subscribeVisibility.removeClass('show-on-profile');
+          $subscribeVisibility.addClass('hide-on-profile');
+          $('#subscribe-visibility.hide-on-profile').one('click', setSubscribedFeedAsPrivate);
+          console.log("Set to public!")
+        } else {
+          location.reload();
+        }
       },
       error: function() {
         console.log('ERROR');
@@ -149,11 +166,16 @@ $(function() {
       url: url,
       type: 'POST',
       success: function() {
-        var $archive = $('#archive');
-        $archive.html('Unarchive');
-        $archive.removeClass('archive');
-        $archive.addClass('unarchive');
-        $('#archive.unarchive').one('click', unarchiveArticle);
+
+        if(window.location.pathname != "/feeds/my_feeds" && window.location.pathname != "/articles/my_bookmarks") {
+          var $archive = $('#archive');
+          $archive.html('Unarchive');
+          $archive.removeClass('archive');
+          $archive.addClass('unarchive');
+          $('#archive.unarchive').one('click', unarchiveArticle);
+        } else { // cannot use changeClass when there are so many buttons with the same class...
+          location.reload();
+        }
       },
       error: function() {
         console.log('ERROR');
@@ -172,11 +194,17 @@ $(function() {
       url: url,
       type: 'PUT',
       success: function() {
-        var $archive = $('#archive');
-        $archive.html('Archive');
-        $archive.removeClass('unarchive');
-        $archive.addClass('archive');
-        $('#archive.archive').one('click', archiveArticle);
+
+        if(window.location.pathname != "/feeds/my_feeds" && window.location.pathname != "/articles/my_bookmarks") {
+          var $archive = $('#archive');
+          $archive.html('Archive');
+          $archive.removeClass('unarchive');
+          $archive.addClass('archive');
+          $('#archive.archive').one('click', archiveArticle);
+        } else {
+          location.reload();
+        }
+
       },
       error: function() {
         console.log('ERROR');
@@ -195,11 +223,19 @@ $(function() {
       url: url,
       type: 'POST',
       success: function() {
-        var $bookmark = $('#bookmark');
-        $bookmark.html('Unbookmark');
-        $bookmark.removeClass('bookmark');
-        $bookmark.addClass('unbookmark');
-        $('#bookmark.unbookmark').one('click', unbookmarkArticle);
+
+        console.log(window.location.pathname);
+        console.log(feedId, articleId); // why is feedId undefined but articleId is fine?
+        if(window.location.pathname != "/feeds/my_feeds" && window.location.pathname != "/articles/my_bookmarks") {
+          console.log("triggered");
+          var $bookmark = $('#bookmark');
+          $bookmark.html('Unbookmark');
+          $bookmark.removeClass('bookmark');
+          $bookmark.addClass('unbookmark');
+          $('#bookmark.unbookmark').one('click', unbookmarkArticle);
+        } else {
+          location.reload();
+        }
       },
       error: function() {
         console.log('ERROR');
@@ -218,13 +254,14 @@ $(function() {
       url: url,
       type: 'PUT',
       success: function() {
-        var $bookmark = $('#bookmark');
-        $bookmark.html('Bookmark');
-        $bookmark.removeClass('unbookmark');
-        $bookmark.addClass('bookmark');
-        $('#bookmark.bookmark').one('click', bookmarkArticle);
 
-        if(window.location.pathname == "/articles/my_bookmarks") {
+        if(window.location.pathname != "/feeds/my_feeds" && window.location.pathname != "/articles/my_bookmarks") {
+          var $bookmark = $('#bookmark');
+          $bookmark.html('Bookmark');
+          $bookmark.removeClass('unbookmark');
+          $bookmark.addClass('bookmark');
+          $('#bookmark.bookmark').one('click', bookmarkArticle);
+        } else {
           location.reload();
         }
       },

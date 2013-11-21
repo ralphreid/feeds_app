@@ -19,6 +19,9 @@ class FeedsController < ApplicationController
     per_page = 5
 
     @my_feeds = current_user.feeds.paginate(page: page, per_page: per_page).order('created_at').all
+    my_archived_articles = current_user.labels.where("archive = true")
+    @my_archived_articles_ids = my_archived_articles.map { |hash| hash[:article_id ] } # returns array of just those IDs
+
   end
 
   def new
