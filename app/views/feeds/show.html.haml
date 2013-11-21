@@ -14,15 +14,14 @@
       %button#subscribe-visibility.hidden{"data-feed-id" => "#{@feed.id}"} Hide on Profile
 
 .feed-about
-  %h4 About
+  %h4 About This Feed
   %ul
     %li#subscribe-count= pluralize(@feed.users.count, "subscriber")
-    %li Category we'll have to add
-    %li Description if we can find one; otherwise we remove this item
-    %li= link_to "Visit Website", @feed.link
+    %li= link_to @feed.category.capitalize, "/feeds/categories?category=#{@feed.category}"
+    %li= link_to "Visit Website", @feed.link, target: "blank"
 
 .feed-articles-section
-  %ol
+  %ul
     - @articles.each do |article|
       %li
         .article
@@ -39,11 +38,6 @@
             - else
               = link_to "Read on #{@feed.title}", article.link
       %hr
-/ update article image
-/ add link to bookmark (need controller)
-/ add link to archive (need controller)
-/ add link to share on google plus
-/ add pagination
 
 = will_paginate @articles
 
