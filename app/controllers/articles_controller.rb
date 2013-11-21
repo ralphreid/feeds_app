@@ -2,6 +2,20 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find params[:id]
+
+    # determine 'next post' link (assumes all records sequential and nothing missing)
+    if Article.where(:id => (params[:id].to_i + 1), :feed_id => params[:feed_id]).present?
+      @next_article_id = params[:id].to_i + 1
+    else
+      @next_article_id = nil
+    end
+
+    # determine 'previous post' link (assumes all records sequential and nothing missing)
+    if Article.where(:id => (params[:id].to_i - 1), :feed_id => params[:feed_id]).present?
+      @previous_article_id = params[:id].to_i - 1
+    else
+      @previous_article_id = nil
+    end
   end
 
   def my_bookmarks

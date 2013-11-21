@@ -5,8 +5,9 @@
   %h4= @article.feed.title
   %ul
     %li= pluralize(@article.feed.users.count, "subscriber")
-    %li Probably no category but we'll figure it out
-    %li= link_to "Go to Feed", @article.feed.link
+    %li= link_to @article.feed.category.capitalize, "/feeds/categories?category=#{@article.feed.category}"
+    %li= link_to "Go to Feed", feed_path(@article.feed)
+    %li= link_to "Visit Website", @article.feed.link, target: "blank"
 
 %hr
 .article-basics
@@ -15,24 +16,6 @@
 
 %hr
 .article-nav
-  / insert a nav_bar here i.e archieve | bookmark | share on google | @article.comment_link(<-this one should work fine)
-  / TEXT-LINK VERSION
-  / %ul
-  /   %li
-  /     - if user_signed_in?
-  /       - if @article.users.where("user_id = 7 AND archive = true").present?
-  /         = link_to "Unarchive", "javascript:void(0)", :id => "archive", :class => "unarchive", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
-  /       - else
-  /         = link_to "Archive", "javascript:void(0)", :id => "archive", :class => "archive", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
-  /   %li
-  /     - if user_signed_in?
-  /       - @article.users.where("user_id = 7 AND bookmark = true").present?
-  /         = link_to "Remove Bookmark", "javascript:void(0)", :id => "bookmark", :class => "unbookmark", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
-  /       - else
-  /         = link_to "Bookmark", "javascript:void(0)", :id => "bookmark", :class => "bookmark", "data-article-id" => "#{@article.id}", "data-feed-id" => "#{@article.feed.id}"
-  /   %li= link_to "Share on Google Plus", "https://plus.google.com/share?url=#{@article.link}", :target => "blank"
-  /   %li= link_to "Read on #{@article.feed.title}", @article.link
-  / BUTTON VERSION
   .article-user-labels
     - if user_signed_in?
       - if @article.users.where("user_id = 7 AND archive = true").present?
@@ -50,16 +33,19 @@
 
 %hr
 .article.article_img_show_page
-  =image_tag @article.images_from_readable.first
+  %p= image_tag @article.images_from_readable.first
 .article.content_show_page
-  = sanitize @article.content_from_readable, tags: %w(table tr td), attributes: %w(id class style)
+  %p= sanitize @article.content_from_readable, tags: %w(table tr td), attributes: %w(id class style)
 
 %hr
 %nav.nav_bottom
-  = link_to "Back", feed_path(@article.feed)
-  Next Post
-  Previous Post
-/figure out logic for next and previous
+  = link_to "Back to Feed", feed_path(@article.feed)
+  - if @next_article_id
+    \|
+    = link_to "Next Post", feed_article_path(@article.feed, @next_article_id)
+  - if @previous_article_id
+    \|
+    = link_to "Previous Post", feed_article_path(@article.feed, @previous_article_id)
 
 :javascript
 (function() {
@@ -67,6 +53,3 @@
   po.src = 'https://apis.google.com/js/platform.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 })();
-
-
-
