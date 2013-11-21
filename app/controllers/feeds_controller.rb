@@ -12,6 +12,10 @@ class FeedsController < ApplicationController
     @feeds = Feed.where("category LIKE ?", "%#{params[:category]}%")
   end
 
+  def my_feeds
+   @my_feeds = current_user.feeds
+  end
+
   def new
     @feed = Feed.new
     @category_new = ""
@@ -27,6 +31,7 @@ class FeedsController < ApplicationController
       render :new
     end
   end
+
 
 
   def show

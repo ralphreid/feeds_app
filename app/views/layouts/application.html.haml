@@ -12,7 +12,7 @@
           %h4= link_to "Feedx", root_path
         %nav.left-nav
           - if user_signed_in?
-            = link_to 'My Feeds', feeds_path
+            = link_to 'My Feeds', my_feeds_path
             \|
             = link_to 'Add a Feed', new_feed_path
             \|
@@ -36,6 +36,12 @@
 
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_ #{name}"
+
+        %nav.side-left-nav
+          - if user_signed_in?
+            %ul
+              %li= link_to "Change My Account Settings", edit_user_registration_path
+
 
     = yield
 
