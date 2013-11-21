@@ -37,8 +37,6 @@ class FeedsController < ApplicationController
     end
   end
 
-
-
   def show
     begin
       page = params[:page] || 1
