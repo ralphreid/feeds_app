@@ -1,14 +1,26 @@
-%h4 My Feeds
+.my-feeds-header
+  %h4 My Feeds
 
-
--@my_feeds.each do |feed|
-  %ul
-    %li= link_to feed.title, feed_path(feed.id)
-    %ul
-      - feed.articles.find(:all, :order => "id desc", :limit => 5).each do |article|
-        %li= article.title
+.my-feeds-results
+  -@my_feeds.each do |feed|
+    %ul.feed-title
+      %li= link_to feed.title, feed_path(feed.id)
+      - if user_signed_in?
+        - if feed.users.where("user_id = #{current_user.id}").present?
+          %button#subscribe.unsubscribe{"data-feed-id" => "#{feed.id}"} Unsubscribe
+          %button#subscribe-visibility.hide-on-profile{"data-feed-id" => "#{feed.id}"} Hide on Profile
+        - else
+          %button#subscribe.subscribe{"data-feed-id" => "#{feed.id}"} Subscribe
+          %button#subscribe-visibility.hidden{"data-feed-id" => "#{feed.id}"} Hide on Profile
+      %ul.article-title
+        - feed.articles.find(:all, :order => "posted_at DESC", :limit => 5).each do |article|
+          - if !(user_signed_in?) || (user_signed_in? && current_user.labels.where(:archive => true, :article_id => article.id).empty?)
+            %li= link_to "#{article.title}", feed_article_path(feed, article)
+            = time_ago_in_words "#{article.posted_at}"
+            ago
 
 = will_paginate @my_feeds
+
 
 
 
