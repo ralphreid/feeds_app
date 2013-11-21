@@ -12,7 +12,7 @@
           %h4= link_to "Feedx", root_path
         %nav.left-nav
           - if user_signed_in?
-            = link_to 'My Feeds', feeds_path
+            = link_to 'My Feeds', my_feeds_path
             \|
           = link_to 'Find a Feed', find_feed_path
         %nav.right-nav

@@ -12,6 +12,10 @@ class FeedsController < ApplicationController
     @feeds = Feed.where("category LIKE ?", "%#{params[:category]}%")
   end
 
+  def my_feeds
+   @my_feeds = current_user.feeds
+  end
+
   def show
     begin
       @feed = Feed.find params[:id]
