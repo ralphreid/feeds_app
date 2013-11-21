@@ -12,28 +12,32 @@
           %h4= link_to "Feedx", root_path
         %nav.left-nav
           - if user_signed_in?
-            = link_to 'My Feeds', feeds_path
+            = link_to 'My Feeds', my_feeds_path
+            \|
+            = link_to 'Add a Feed', new_feed_path
             \|
           = link_to 'Find a Feed', find_feed_path
         %nav.right-nav
           - if user_signed_in?
             Logged in as
             %b= current_user.email
-            = link_to "My Profile", user_path(current_user) # update link later!
             \|
-            = link_to "Sign out", destroy_user_session_path, method: :delete
+            = link_to "My Profile", user_path(current_user)
+            \|
+            = link_to "Account Settings", edit_user_registration_path
+            \|
+            = link_to "Sign Out", destroy_user_session_path, method: :delete
           - else
-            = link_to "Sign up", new_user_registration_path
+            = link_to "Sign Up", new_user_registration_path
             \|
-            = link_to "Sign in", new_user_session_path
+            = link_to "Sign In", new_user_session_path
             \|
-            = link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)
+            = link_to "Sign In with Google", user_omniauth_authorize_path(:google_oauth2)
 
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_ #{name}"
-        %nav.side-left-nav
-          %ul
-            %li= link_to "Change My Account Settings", edit_user_registration_path
 
     = yield
 
+  %footer
+    %small 2013 Feedx. This is a non-commercial student project.
