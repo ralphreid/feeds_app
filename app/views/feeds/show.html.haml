@@ -19,25 +19,26 @@
     %li#subscribe-count= pluralize(@feed.users.count, "subscriber")
     %li= link_to @feed.category.capitalize, "/feeds/categories?category=#{@feed.category}"
     %li= link_to "Visit Website", @feed.link, target: "blank"
+  %hr/
 
 .feed-articles-section
+  %h4 Latest Articles
   %ul
     - @articles.each do |article|
-      %li
-        .article
-          .article-title
-            = article.title
-          .article-date
-            = time_ago_in_words(article.posted_at)
-            ago
-            = "(#{article.posted_at})"
-          .article-summary
-            - if article.description.present?
-              = sanitize(article.description, tags: %w(table tr td), attributes: %w(id class style)).truncate(100, :separator => " ")
-              = link_to "Read more", feed_article_path(@feed, article)
-            - else
-              = link_to "Read on #{@feed.title}", article.link
-      %hr
+      - if !(user_signed_in?) || (user_signed_in? && current_user.labels.where(:archive => true, :article_id => article.id).empty?)
+        %li
+          .article
+            .article-title
+              %b= article.title
+            .article-date
+              %i= "#{time_ago_in_words(article.posted_at)} ago (#{article.posted_at})"
+            .article-summary
+              - if article.description.present?
+                = sanitize(article.description, tags: %w(table tr td), attributes: %w(id class style)).truncate(200, :separator => " ")
+                = link_to "Read more", feed_article_path(@feed, article)
+              - else
+                = link_to "Read on #{@feed.title}", article.link
 
 = will_paginate @articles
 
+%hr/

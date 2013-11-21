@@ -44,7 +44,8 @@ class FeedsController < ApplicationController
 
       @feed = Feed.find params[:id]
       Article.get_articles_from_feed(@feed)
-      @articles = @feed.articles.paginate(page: page, per_page: per_page).order('created_at').all
+
+      @articles = @feed.articles.paginate(page: page, per_page: per_page).order('posted_at DESC').all
     rescue ActiveRecord::RecordNotFound
       redirect_to feed_not_found_path
     end
