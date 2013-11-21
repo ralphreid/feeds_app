@@ -14,8 +14,6 @@ gem 'erb2haml' # then run: rake haml:replace_erbs
 
 gem 'bcrypt-ruby', '~> 3.0.0'
 
-gem 'will_paginate'
-
 gem 'devise'
 gem 'omniauth-google-oauth2'
 
@@ -26,6 +24,8 @@ gem 'fastimage'
 
 gem 'carrierwave'
 gem "fog", "~> 1.3.1"
+
+gem 'will_paginate', '~> 3.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
