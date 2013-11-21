@@ -1,0 +1,19 @@
+%h4 My Feeds
+
+
+-@my_feeds.each do |feed|
+  %ul
+    %li= link_to feed.title, feed_path(feed.id)
+    %ul
+      %li= feed.articles.first.title
+
+
+    / %ul
+    /   - feed.articles.find(:all, :order => "id desc", :limit => 5).each do |article|
+    /   %li= articile.title
+
+
+
+
+
+

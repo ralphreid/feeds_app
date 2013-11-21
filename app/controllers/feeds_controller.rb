@@ -12,6 +12,28 @@ class FeedsController < ApplicationController
     @feeds = Feed.where("category LIKE ?", "%#{params[:category]}%")
   end
 
+  def my_feeds
+   @my_feeds = current_user.feeds
+  end
+
+  def new
+    @feed = Feed.new
+    @category_new = ""
+  end
+
+  def create
+    @feed = Feed.new(params[:feed])
+    @feed.category = params[:category_new].downcase if params[:category_new].present? && params[:feed][:category].empty?
+    if Feed.get_feed(@feed.rss, @feed.category) # i.e. if this feed can be saved successfully
+      @feed = Feed.last # need to re-get @feed so that there's an ID (which only becomes available after save)
+      redirect_to feed_path(@feed), notice: 'Feed added!'
+    else
+      render :new
+    end
+  end
+
+
+
   def show
     begin
       @feed = Feed.find params[:id]
