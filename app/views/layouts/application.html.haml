@@ -37,12 +37,6 @@
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_ #{name}"
 
-        %nav.side-left-nav
-          - if user_signed_in?
-            %ul
-              %li= link_to "Change My Account Settings", edit_user_registration_path
-
-
     = yield
 
   %footer
