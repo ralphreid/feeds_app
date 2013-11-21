@@ -25,6 +25,7 @@ gem 'ruby-readability', :require => 'readability'
 gem 'fastimage'
 
 gem 'carrierwave'
+gem "fog", "~> 1.3.1"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -38,7 +39,7 @@ group :development, :test do
   # gem 'pry-stack_explorer'
   gem 'annotate'
   gem 'quiet_assets'
-  # gem 'better_errors'
+  gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
   gem "rspec-rails"

@@ -24,7 +24,10 @@
   %div
     = f.file_field :image
     %br/
-    / = f.file_
+  %div
+    = f.label :bio
+    %br
+    = f.text_field :bio
 
   %div= f.submit "Sign up"
 = render "devise/shared/links"

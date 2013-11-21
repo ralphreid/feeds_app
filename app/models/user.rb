@@ -41,16 +41,14 @@ class User < ActiveRecord::Base
         binding.pry
         user.first_name = auth.info.first_name
         user.last_name = auth.info.last_name
-        #may be used with image in carrier wave
-        # user.image = auth.image
+        user.image_omniauth = auth.info.image
         user.provider = auth.provider
         user.uid = auth.uid
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
         user
       end
-      # user.save(:validate => false)
-      # user
+      
     end
   end
 
