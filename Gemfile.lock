@@ -287,4 +287,4 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   uglifier (>= 1.0.3)
-  will_paginate
+  will_paginate (~> 3.0)
