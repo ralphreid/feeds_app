@@ -9,11 +9,16 @@ class FeedsController < ApplicationController
   end
 
   def categories
-    @feeds = Feed.where("category LIKE ?", "%#{params[:category]}%")
+    page = params[:page] || 1
+    per_page = 15
+    @feeds = Feed.where("category LIKE ?", "%#{params[:category]}%").paginate(page: page, per_page: per_page).order('created_at').all
   end
 
   def my_feeds
-   @my_feeds = current_user.feeds
+    page = params[:page] || 1
+    per_page = 5
+
+    @my_feeds = current_user.feeds.paginate(page: page, per_page: per_page).order('created_at').all
   end
 
   def new
@@ -36,9 +41,12 @@ class FeedsController < ApplicationController
 
   def show
     begin
+      page = params[:page] || 1
+      per_page = 10
+
       @feed = Feed.find params[:id]
       Article.get_articles_from_feed(@feed)
-      @articles = @feed.articles
+      @articles = @feed.articles.paginate(page: page, per_page: per_page).order('created_at').all
     rescue ActiveRecord::RecordNotFound
       redirect_to feed_not_found_path
     end
