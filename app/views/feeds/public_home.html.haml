@@ -1,0 +1,26 @@
+.top-section-home-public
+  .logo-home-public
+    %h2= link_to "Feedx", root_path
+
+  .search-home-public
+    = link_to 'Find a Feed', find_feed_path
+
+.bottom-section-home-public
+  .categories-section-home-public
+    .category-tile
+      %h3= link_to "News", categories_feed_path(:category => 'news')
+    .category-tile
+      %h3= link_to "Tech", categories_feed_path(:category => 'technology')
+    .category-tile
+      %h3= link_to "Business", categories_feed_path(:category => 'business')
+    .category-tile
+      %h3= link_to "Travel", categories_feed_path(:category => 'travel')
+    .category-tile
+      %h3= link_to "Fashion", categories_feed_path(:category => 'fashion')
+    .category-tile
+      %h3= link_to "Design", categories_feed_path(:category => 'design')
+    .category-tile
+      %h3= link_to "Food", categories_feed_path(:category => 'cooking')
+    .category-tile
+      %h3= link_to "Photography", categories_feed_path(:category => 'photography')
+

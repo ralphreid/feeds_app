@@ -1,9 +1,15 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :timeoutable
+  # :confirmable, :lockable and :timeoutable
+  devise  :database_authenticatable,
+          :registerable,
+          :recoverable,
+          :rememberable,
+          :trackable,
+          :validatable,
+          :timeoutable,
+          :omniauthable,
+          :omniauth_providers => [:google_oauth2]
          # , :confirmable, :confirm_within => 1.hour
 
   # Setup accessible (or protected) attributes for your model
@@ -23,9 +29,32 @@ class User < ActiveRecord::Base
 
   before_validation :assign_default_role
 
-private
-  def assign_default_role
-    self.role = "user" if self.role.nil?
+  mount_uploader :image, ImageUploader
+
+  def self.from_omniauth(auth)
+    if user = User.find_by_email(auth.info.email)  # auth[:info][:email] because hashymash is used
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user
+    else
+      user = User.where(auth.slice(:provider, :uid)).first_or_create do |user|
+        binding.pry
+        user.first_name = auth.info.first_name
+        user.last_name = auth.info.last_name
+        user.image_omniauth = auth.info.image
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+        user
+      end
+      
+    end
   end
 
+  private
+
+    def assign_default_role
+      self.role = "user" if self.role.nil?
+    end
 end

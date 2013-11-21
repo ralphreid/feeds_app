@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131119160551) do
+ActiveRecord::Schema.define(:version => 20131121011620) do
 
   create_table "articles", :force => true do |t|
     t.integer  "feed_id"
@@ -57,8 +57,9 @@ ActiveRecord::Schema.define(:version => 20131119160551) do
     t.integer  "feed_id"
     t.integer  "user_id"
     t.string   "category"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.boolean  "show_on_profile"
   end
 
   add_index "subscriptions", ["feed_id"], :name => "index_subscriptions_on_feed_id"
@@ -86,6 +87,9 @@ ActiveRecord::Schema.define(:version => 20131119160551) do
     t.string   "role"
     t.text     "image"
     t.string   "bio"
+    t.string   "provider"
+    t.string   "uid"
+    t.text     "image_omniauth"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

@@ -1,16 +1,41 @@
 FeedxApp::Application.routes.draw do
-  devise_for :users, :controllers => {:registrations => 'users'}
-  # , :path_prefix => 'my'
+  devise_for  :users,
+              :controllers => {
+                :registrations => 'users',
+                :omniauth_callbacks => "omniauth_callbacks"
+              }
+
   devise_scope :user do
     # get "/users/show/:id" => "users#show"
-    resources :users, :only => [:show] 
+    resources :users, :only => [:show]
   end
 
+  match '/feeds/find' => 'feeds#find', as: :find_feed
+  match '/feeds/categories' => 'feeds#categories', as: :categories_feed
+
   resources :feeds do
-    resources :articles
+    resources :articles do
+      post 'bookmark', :on => :member
+      put 'unbookmark', :on => :member
+      post 'archive', :on => :member
+      put 'unarchive', :on => :member
+    end
+
     post 'subscribe', :on => :member
     put 'unsubscribe', :on => :member
+    put 'hide_on_profile', :on => :member
+    put 'show_on_profile', :on => :member
   end
+
+  get '/feed-not-found' => 'errors#feed_not_found', as: :feed_not_found
+
+  match '/404', :to => 'errors#not_found'
+  match '/422', :to => 'errors#server_error'
+  match '/500', :to => 'errors#server_error'
+
+  get '/public_home', to: 'feeds#public_home', as: :public_home
+
+  # get '/heyjude' => 'feeds#heyjude', as: :heyjude
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -62,7 +87,7 @@ FeedxApp::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # Required Devise config: "Ensure you have defined root_url to *something* in your config/routes.rb"
-  root :to => 'feeds#index' # change later
+  root :to => 'feeds#public_home' # change later
 
   # See how all your routes lay out with "rake routes"
 

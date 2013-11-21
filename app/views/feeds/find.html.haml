@@ -1,0 +1,15 @@
+.feed-views-header
+  %h4 Find Feed
+
+= render :partial => 'form'
+
+.feed-results.search
+  - unless @feeds.nil?
+    - if @feeds.empty?
+      No results found
+    - else
+      %h2 Results
+      %ul
+        - @feeds.each do |feed|
+          %li
+            = link_to feed.title, feed

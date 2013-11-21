@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Article < ActiveRecord::Base
 
   attr_accessible :title, :content, :link, :description, :author, :comment_link, :posted_at, :feed_id
@@ -28,6 +30,18 @@ class Article < ActiveRecord::Base
       a.feed_id = feed_id
       a.save!
     end
+  end
+
+  def content_from_readable
+    parsed_document.content
+  end
+
+  def images_from_readable
+    parsed_document.images
+  end
+
+  def parsed_document
+    @parsed_document ||= Readability::Document.new(open(link).read)
   end
 
 end

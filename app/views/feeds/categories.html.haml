@@ -1,0 +1,12 @@
+.feed-views-header
+  %h2= params[:category].capitalize
+
+.feed-results.categories
+  - unless @feeds.nil?
+    - if @feeds.empty?
+      No results found
+    - else
+      %ul
+        - @feeds.each do |feed|
+          %li
+            = link_to feed.title, feed
