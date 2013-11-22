@@ -81,11 +81,12 @@
      
       .main-view.col-md-12
         = yield
-      %footer.footer.col-md-12
-        .codeship.img-responsive.col-md-1
-          = image_tag "https://www.codeship.io/projects/0104e5b0-352d-0131-c05b-2ef0a96c4b03/status"
-        .bottom-nav.col-md-11
-          = link_to 'About', page_path('about')
+      .spacer.col-md-12
+        %footer.footer.col-md-12
+          .codeship.img-responsive.col-md-1
+            = image_tag "https://www.codeship.io/projects/0104e5b0-352d-0131-c05b-2ef0a96c4b03/status"
+          .bottom-nav.col-md-11
+            = link_to 'About', page_path('about')
 
 
 
