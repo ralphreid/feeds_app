@@ -3,18 +3,6 @@
     .field
       = label_tag :title
       = text_field_tag :title
-    .field
-      = label_tag :category
-      %select{name: :category}
-        %option{value: ''} Select:
-        %option{value: :technology} Technology
-        %option{value: :business} Business
-        %option{value: :news} News
-        %option{value: :travel} Travel
-        %option{value: :photography} Photography
-        %option{value: :design} Design
-        %option{value: :cooking} Cooking
-        %option{value: :fashion} Fashion
   %br/
   .actions
     = submit_tag 'Search'
