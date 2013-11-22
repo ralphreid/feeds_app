@@ -18,7 +18,7 @@ class Feed < ActiveRecord::Base
 
 
   def self.add_feed(feed, category=nil)
-    if feed.class == Feed
+    unless feed == 0
       f = Feed.where(:rss => feed.feed_url).first_or_create
       f.title = feed.title
       f.rss = feed.feed_url
