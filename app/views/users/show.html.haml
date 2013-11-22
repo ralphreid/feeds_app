@@ -22,9 +22,9 @@
       %i= link_to f.category, "/feeds/categories?category=#{f.category}"
 
 .user-private-feeds
-  - if current_user == @user
+  - if current_user == @user && @user_private_feeds.present?
     %h4
-      = "[PRIVATE] #{@user.first_name}, here are your private feeds:"
+      = "[PRIVATE] #{@user.first_name}, your private feeds:"
     %ul
     - @user_private_feeds.each do |f|
       %li
