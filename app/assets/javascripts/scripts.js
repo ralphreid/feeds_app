@@ -276,4 +276,9 @@ $(function() {
     $(this).css({visibility:"hidden"});
   });
 
+  $("field").on('click', function() {
+    if ($(this).val() == "Title");
+        $(this).val("");
+  });
+
 });

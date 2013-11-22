@@ -1,8 +1,7 @@
 = form_tag '/feeds/find', id: "form-find-feed" do
   %fieldset
     .field
-      = label_tag :title
-      = text_field_tag :title
+      = text_field_tag :title, nil, :placeholder => "Title"
   %br/
   .actions
     = submit_tag 'Search'
