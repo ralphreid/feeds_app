@@ -42,8 +42,8 @@ $(function() {
         }
 
         if(window.location.pathname == "/feeds/"+feedId) {
-          var $subscribeCount = $('#subscribe-count').val();
-          updateSubscribeCountOnFeedShowPage($subscribeCount, "subscribe");
+          var subscribeCountVal = parseInt($('#subscribe-count').html());
+          updateSubscribeCountOnFeedShowPage(subscribeCountVal, "subscribe");
         }
 
       },
@@ -74,8 +74,8 @@ $(function() {
         }
 
         if(window.location.pathname == "/feeds/"+feedId) {
-          var $subscribeCount = $('#subscribe-count').val();
-          updateSubscribeCountOnFeedShowPage($subscribeCount, "unsubscribe");
+          var subscribeCountVal = parseInt($('#subscribe-count').html());
+          updateSubscribeCountOnFeedShowPage(subscribeCountVal, "unsubscribe");
         };
       },
       error: function() {
@@ -89,7 +89,7 @@ $(function() {
     if(subscriptionStatus == "subscribe") {
       currentCount++;
     } else {
-      currentCount - 1;
+      currentCount -= 1;
     }
 
     // display
@@ -98,6 +98,7 @@ $(function() {
     } else {
       $('#subscribe-count').html(currentCount + " subscribers");
     }
+
   }
 
   function setSubscribedFeedAsPrivate() {
