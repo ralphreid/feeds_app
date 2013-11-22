@@ -88,7 +88,7 @@ class FeedsController < ApplicationController
 
   def find
     if params[:title]
-      @feeds = Feed.where("title LIKE ? AND category LIKE ?", "%#{params[:title]}%", "%#{params[:category]}%")
+      @feeds = Feed.where("title ILIKE ?", "%#{params[:title]}%")
     else
       @feed = Feed.new
     end
