@@ -13,18 +13,19 @@
   = @user.bio if @user.bio.present?
 
 .user-public-feeds
-  %h4= "#{@user.first_name} is following..."
-  %ul
-  - @user_public_feeds.each do |f|
-    %li
-      %b= link_to f.title, feed_path(f)
-      |
-      %i= link_to f.category, "/feeds/categories?category=#{f.category}"
+  - if @user_public_feeds.present?
+    %h4= "#{@user.first_name} is following..."
+    %ul
+    - @user_public_feeds.each do |f|
+      %li
+        %b= link_to f.title, feed_path(f)
+        |
+        %i= link_to f.category, "/feeds/categories?category=#{f.category}"
 
 .user-private-feeds
   - if current_user == @user && @user_private_feeds.present?
     %h4
-      = "[PRIVATE] #{@user.first_name}, your private feeds:"
+      = "[PRIVATE] #{@user.first_name}, your #{pluralize(@user_private_feeds.count, "private feed")}:"
     %ul
     - @user_private_feeds.each do |f|
       %li
