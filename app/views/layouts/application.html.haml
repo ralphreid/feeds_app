@@ -6,28 +6,35 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}
+
   %body
     .container
-      %nav.nav-bar
-        %nav.left-nav.logo
-          %h4= link_to "Feedx", root_path
-        %nav.left-nav
+      %nav.nav-bar.col-md-12
+        %nav.left-nav.logo.col-md-1
+          .feedx_symbol
+            = link_to 'feedx', root_path 
+        %nav.left-nav.col-md-5
+          / %ul.nav.nav-pills
+          /   %li Tes
+
           - if user_signed_in?
             = link_to 'My Feeds', my_feeds_path
+            \|
+            = link_to 'Users', users_path
             \|
             = link_to 'My Bookmarks', my_bookmarks_path
             \|
             = link_to 'Add a Feed', new_feed_path
             \|
           = link_to 'Find a Feed', find_feed_path
-        %nav.right-nav
+        %nav.right-nav.col-md-6
           - if user_signed_in?
             Logged in as
             %b= current_user.email
             \|
             = link_to "My Profile", user_path(current_user)
             \|
-            = link_to "Account Settings", edit_user_registration_path
+            = link_to "Settings", edit_user_registration_path
             \|
             = link_to "Sign Out", destroy_user_session_path, method: :delete
           - else
@@ -39,18 +46,13 @@
 
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_ #{name}"
-            
-    = yield
-
-    %footer.footer
-      .codeship
-        = image_tag "https://www.codeship.io/projects/0104e5b0-352d-0131-c05b-2ef0a96c4b03/status"
-      .feedx_symbol
-        feed_X
-      .bottom-nav
-        = link_to 'About', page_path('about')
-        \|
-        - if user_signed_in?
-          = link_to 'Users', users_path
+      .main-view.col-md-12
+        = yield
+      %footer.footer.col-md-12
+        .codeship.img-responsive.col-md-1
+          = image_tag "https://www.codeship.io/projects/0104e5b0-352d-0131-c05b-2ef0a96c4b03/status"
+        .bottom-nav.col-md-11
+          = link_to 'About', page_path('about')
+          
 
 
